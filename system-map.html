@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Карта системы MakeBiz</title>
+<style>
+  :root{
+    --blue:#013CA4; --blue-tint:#eef3fb;
+    --bg:#f6f7f9; --card:#ffffff; --border:#e6e8ec;
+    --tp:#1a1d21; --ts:#5f6b7a; --tm:#98a1ad;
+    --green:#1f9d55; --amber:#d9880a;
+    --pill:#f2f4f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tp);
+    font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5}
+  .page{max-width:1120px;margin:0 auto;padding:32px 20px 60px}
+  header{margin-bottom:24px}
+  .h-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  h1{font-size:26px;font-weight:600;margin:0;color:var(--blue)}
+  .sub{font-size:15px;color:var(--ts)}
+  .upd{font-size:13px;color:var(--tm);margin-top:4px}
+  .legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:16px;
+    font-size:13px;color:var(--ts)}
+  .legend .item{display:flex;align-items:center;gap:6px}
+  .dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
+  .dg{background:var(--green)} .da{background:var(--amber)}
+  .filters{display:flex;gap:8px;margin:20px 0 4px;flex-wrap:wrap}
+  .fbtn{font-size:13px;padding:6px 14px;border-radius:20px;border:1px solid var(--border);
+    background:var(--card);color:var(--ts);cursor:pointer;transition:.15s}
+  .fbtn:hover{border-color:var(--blue);color:var(--blue)}
+  .fbtn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .sec-label{font-size:13px;color:var(--tm);margin:26px 0 10px;letter-spacing:.03em;
+    text-transform:none;font-weight:500}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:14px 16px;transition:.15s}
+  .card:hover{border-color:#cdd4dd;transform:translateY(-2px)}
+  .nm{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .role{font-size:13px;color:var(--ts);margin:5px 0 10px;line-height:1.45}
+  .pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
+  .pill{font-size:11.5px;background:var(--pill);border-radius:6px;padding:2px 8px;color:var(--ts)}
+  .conn{font-size:12px;color:var(--blue);display:flex;align-items:center;gap:6px}
+  .aks{grid-column:1/-1;border:2px solid var(--blue);background:var(--blue-tint)}
+  .aks .nm,.aks .conn{color:var(--blue)}
+  .aks .role{color:#2b4a7a}
+  .tbl{font-size:12px;color:var(--ts);line-height:1.6;margin-top:6px}
+  .base .nm{font-size:14px}
+  footer{margin-top:40px;font-size:12.5px;color:var(--tm);border-top:1px solid var(--border);
+    padding-top:16px}
+  @media (max-width:520px){h1{font-size:22px}.page{padding:24px 14px 40px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="h-top">
+      <h1>Карта системы MakeBiz</h1>
+      <span class="sub">живой ассистент собственника</span>
+    </div>
+    <div class="upd">обновлено 3 июля 2026</div>
+    <div class="legend">
+      <span class="item"><span class="dot dg"></span>работает</span>
+      <span class="item"><span class="dot da"></span>ждёт или настраивается</span>
+      <span class="item">пиллы это права агента</span>
+    </div>
+    <div class="filters">
+      <button class="fbtn on" data-f="all">все агенты</button>
+      <button class="fbtn" data-f="ok">работают</button>
+      <button class="fbtn" data-f="wait">настраиваются</button>
+    </div>
+  </header>
+
+  <div class="card aks agent" data-status="ok">
+    <div class="nm"><span class="dot dg"></span>Акс · единый вход и маршрутизатор</div>
+    <div class="role">Антон пишет только сюда. Определяет зону запроса, дёргает нужного агента, собирает ответ. Перед ответом самопроверка маршрута</div>
+    <div class="pills"><span class="pill">координация</span><span class="pill">самопроверка</span></div>
+    <div class="conn">связан со всеми агентами</div>
+  </div>
+
+  <div class="sec-label">Личный контур</div>
+  <div class="grid">
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Пульс</div><div class="role">Чек-ины самочувствия, daily и weekly</div><div class="pills"><span class="pill">Sheets</span><span class="pill">крон</span></div><div class="conn">база: Google-таблица</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Психолог</div><div class="role">Эмоции, состояние, опора</div><div class="pills"><span class="pill">Sheets</span></div><div class="conn">личное, изолировано</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Тичер</div><div class="role">Английский, уроки, словарь</div><div class="pills"><span class="pill">Sheets</span><span class="pill">крон</span></div><div class="conn">только запрос по языку</div></div>
+  </div>
+
+  <div class="sec-label">Бизнес контур</div>
+  <div class="grid">
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Ментор</div><div class="role">Стратегия, проекты, решения</div><div class="pills"><span class="pill">Sheets</span><span class="pill">Drive</span><span class="pill">крон</span></div><div class="conn">читает карточки Связного</div></div>
+    <div class="card agent" data-status="wait"><div class="nm"><span class="dot da"></span>Диспетчер</div><div class="role">Задачи, статусы, канбан</div><div class="pills"><span class="pill">exec</span><span class="pill">Drive</span></div><div class="conn">Bitrix</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Юрист</div><div class="role">Договоры, счета, акты, NDA по шаблонам</div><div class="pills"><span class="pill">exec</span><span class="pill">Drive</span></div><div class="conn">шаблоны и реестр в Drive</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Связной</div><div class="role">Контакты и сеть, чтение личных диалогов</div><div class="pills"><span class="pill">exec</span><span class="pill">tg-читает</span><span class="pill">база</span></div><div class="conn">Telegram архив, свой чат</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Финансист</div><div class="role">Счета, поступления, аналитика</div><div class="pills"><span class="pill">exec</span><span class="pill">bash</span><span class="pill">база</span></div><div class="conn">T-Bank, Adesk скоро</div></div>
+  </div>
+
+  <div class="sec-label">Новостной контур</div>
+  <div class="grid">
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Радар</div><div class="role">Ежедневный сбор AI-сигналов поиском</div><div class="pills"><span class="pill">exec</span><span class="pill">web</span><span class="pill">база</span></div><div class="conn">пишет в news.sqlite</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Аналитик</div><div class="role">Анализ, метрики, ежедневный отчёт</div><div class="pills"><span class="pill">exec</span><span class="pill">Drive</span><span class="pill">база</span></div><div class="conn">отчёт в группу</div></div>
+  </div>
+
+  <div class="sec-label">Данные и витрина</div>
+  <div class="grid">
+    <div class="card agent" data-status="wait"><div class="nm"><span class="dot da"></span>Дашборд</div><div class="role">Сводит данные агентов в общую базу для витрины</div><div class="pills"><span class="pill">exec</span><span class="pill">bash</span><span class="pill">Sheets</span></div><div class="conn">PostgreSQL vitrina_db</div></div>
+  </div>
+
+  <div class="sec-label">Мониторинг и качество</div>
+  <div class="grid">
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Аудитор</div><div class="role">Наблюдатель системы, журнал, ошибки, границы</div><div class="pills"><span class="pill">exec</span><span class="pill">sessions</span><span class="pill">крон</span><span class="pill">база</span></div><div class="conn">база audit.sqlite</div></div>
+    <div class="card agent" data-status="ok"><div class="nm"><span class="dot dg"></span>Советник</div><div class="role">Рекомендации по развитию системы</div><div class="pills"><span class="pill">чтение</span><span class="pill">web</span><span class="pill">крон</span></div><div class="conn">раз в неделю</div></div>
+    <div class="card agent" data-status="wait"><div class="nm"><span class="dot da"></span>Контролёр</div><div class="role">Проверка маршрутов Акса, разворот при ошибке</div><div class="pills"><span class="pill">sessions</span><span class="pill">exec</span></div><div class="conn">пишет в audit.sqlite</div></div>
+  </div>
+
+  <div class="sec-label">Базы данных и интеграции</div>
+  <div class="grid">
+    <div class="card base"><div class="nm">finance.sqlite</div><div class="tbl">payments, account_snapshots, daily_summaries</div><div class="conn" style="margin-top:8px">хозяин: Финансист</div></div>
+    <div class="card base"><div class="nm">svyaznoy.sqlite</div><div class="tbl">contacts, contact_fact_index, contact_asset_summary</div><div class="conn" style="margin-top:8px">хозяин: Связной</div></div>
+    <div class="card base"><div class="nm">news.sqlite</div><div class="tbl">ai_signal_registry, raw_news_ingest, daily_analysis_report</div><div class="conn" style="margin-top:8px">хозяева: Радар, Аналитик</div></div>
+    <div class="card base"><div class="nm">audit.sqlite</div><div class="tbl">events, system_registry, errors, integration_health, boundary_violations</div><div class="conn" style="margin-top:8px">хозяин: Аудитор</div></div>
+    <div class="card base"><div class="nm">vitrina_db · PostgreSQL</div><div class="tbl">витринные таблицы, пока пусто</div><div class="conn" style="margin-top:8px">хозяин: Дашборд</div></div>
+    <div class="card base"><div class="nm">Google Sheets</div><div class="tbl">Пульс, Связной контакты, реестр Юриста</div><div class="conn" style="margin-top:8px">общий слой таблиц</div></div>
+    <div class="card base"><div class="nm">Внешние API</div><div class="tbl">Bitrix, T-Bank, Adesk, Telegram архив Mongo</div><div class="conn" style="margin-top:8px">через своих агентов</div></div>
+  </div>
+
+  <footer>
+    Личное и бизнес разделены по доступу. Сырые переписки заперты в Связном, наружу только карточки. Пятнадцать агентов, единый вход через Акса
+  </footer>
+</div>
+
+<script>
+  var btns=document.querySelectorAll('.fbtn');
+  var agents=document.querySelectorAll('.agent');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      var f=b.getAttribute('data-f');
+      agents.forEach(function(a){
+        var s=a.getAttribute('data-status');
+        a.style.display=(f==='all'||f===s)?'':'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>
