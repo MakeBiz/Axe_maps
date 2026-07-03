@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Карта системы MakeBiz</title>
 <style>
-  :root{--blue:#013CA4;--bg:#f6f7f9;--card:#fff;--border:#e6e8ec;--tp:#1a1d21;--ts:#5f6b7a;--tm:#98a1ad;--green:#1f9d55;--amber:#d9880a;--wait-bg:#fef8ec;--wait-bd:#f0e0bd;--pill:#f2f4f7}
+  :root{--blue:#013CA4;--bg:#f6f7f9;--card:#fff;--border:#e6e8ec;--tp:#1a1d21;--ts:#5f6b7a;--tm:#98a1ad;--green:#1f9d55;--amber:#d9880a;--dev:#5566a0;--wait-bg:#fef8ec;--wait-bd:#f0e0bd;--pill:#f2f4f7}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--tp);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
   .page{max-width:1140px;margin:0 auto;padding:32px 20px 60px}
@@ -15,24 +15,27 @@
   .legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:14px;font-size:13px;color:var(--ts)}
   .legend .item{display:flex;align-items:center;gap:6px}
   .dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
-  .dg{background:var(--green)} .da{background:var(--amber)}
-  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:20px 0 6px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+  .dg{background:var(--green)} .da{background:var(--amber)} .dd{background:var(--dev)}
+  .tabs{display:flex;gap:8px;margin:20px 0 0;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+  .tab{font-size:14px;padding:9px 16px;border:none;background:none;color:var(--ts);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .tab.on{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:18px 0 6px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px}
   .fg{display:flex;flex-direction:column;gap:4px}
   .fg label{font-size:11.5px;color:var(--tm)}
   select{font-size:13px;padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--tp);cursor:pointer}
   .exp{margin-left:auto;font-size:13px;padding:8px 14px;border-radius:8px;border:1px solid var(--blue);background:#fff;color:var(--blue);cursor:pointer}
-  .exp:hover{background:var(--blue);color:#fff}
   .contour-head{font-size:15px;font-weight:600;padding:9px 14px;border-radius:10px;margin:22px 0 12px;display:flex;align-items:center;gap:8px}
   .ch-count{font-size:12.5px;font-weight:400;opacity:.75}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px;align-items:start}
-  .card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;transition:border-color .15s}
-  .card:hover{border-color:#cdd4dd}
+  .card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;min-height:150px}
   .card[data-status="wait"]{background:var(--wait-bg);border-color:var(--wait-bd)}
+  .card.dev{border:1px dashed #cbd2dc;background:#fafbfc;min-height:120px}
   .icons{position:absolute;top:12px;right:12px;display:flex;gap:6px}
-  .ib{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--ts);font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:.15s}
-  .ib:hover{border-color:var(--blue);color:var(--blue)}
+  .ib{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);background:var(--card);color:var(--ts);font-size:13px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none}
   .nm{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px;padding-right:56px}
-  .role{font-size:13px;color:var(--ts);margin:5px 0 10px;line-height:1.45}
+  .devbadge{font-size:11px;background:#eaeef4;color:var(--dev);border-radius:6px;padding:2px 8px;display:inline-block;margin-bottom:7px}
+  .role{font-size:13px;color:var(--ts);margin:5px 0 6px;line-height:1.45}
+  .rel{font-size:12px;color:var(--blue);margin-bottom:8px}
   .pills{display:flex;flex-wrap:wrap;gap:5px}
   .pill{font-size:11.5px;background:var(--pill);border-radius:6px;padding:2px 8px;color:var(--ts)}
   .card[data-status="wait"] .pill{background:#f7edd6}
@@ -40,214 +43,186 @@
   .card.open .desc{display:block}
   .desc .row{margin-bottom:6px}
   .desc b{color:var(--tp);font-weight:600}
+  .pane{display:none} .pane.on{display:block}
+  .lcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+  .lcard .t{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+  .lcard .m{font-size:12.5px;color:var(--ts);margin-top:4px}
+  .lcard .id{font-size:12px;color:var(--tm);font-family:ui-monospace,monospace;margin-top:6px}
+  .note{font-size:12.5px;color:var(--tm);margin:8px 2px 0}
   .tbl{font-size:12px;color:var(--ts);line-height:1.6;margin-top:6px}
   .base .nm{padding-right:0}
   footer{margin-top:40px;font-size:12.5px;color:var(--tm);border-top:1px solid var(--border);padding-top:16px}
-  @media (max-width:520px){h1{font-size:22px}.page{padding:24px 14px 40px}.bar{gap:8px}}
+  @media (max-width:520px){h1{font-size:22px}.page{padding:24px 14px 40px}}
 </style>
 </head>
 <body>
 <div class="page">
   <header>
     <h1>Карта системы MakeBiz</h1>
-    <div class="sub">живой ассистент собственника · пятнадцать агентов под единым входом</div>
+    <div class="sub">живой ассистент собственника · агенты, пользователи, группы и боты</div>
     <div class="upd">обновлено 3 июля 2026</div>
-    <div class="legend">
-      <span class="item"><span class="dot dg"></span>работает</span>
-      <span class="item"><span class="dot da"></span>настраивается</span>
-      <span class="item">знак вопроса это описание, стрелка это полный документ агента</span>
-    </div>
+    <div class="legend"><span class="item"><span class="dot dg"></span>работает</span><span class="item"><span class="dot da"></span>настраивается</span><span class="item"><span class="dot dd"></span>в разработке</span><span class="item">вопрос это описание, стрелка это документ</span></div>
   </header>
 
+  <div class="tabs">
+    <button class="tab on" data-t="agents">Агенты</button>
+    <button class="tab" data-t="users">Пользователи</button>
+    <button class="tab" data-t="groups">Группы</button>
+    <button class="tab" data-t="bots">Боты</button>
+  </div>
+
+  <div class="pane on" id="p-agents">
   <div class="bar">
-    <div class="fg"><label>контур</label><select id="f-contour"><option value="all">все контуры</option><option value="yadro">ядро</option><option value="lichniy">личный</option><option value="biznes">бизнес</option><option value="novostnoy">новостной</option><option value="dannie">данные</option><option value="monitoring">мониторинг</option></select></div>
+    <div class="fg"><label>контур</label><select id="f-contour"><option value="all">все контуры</option><option value="yadro">ядро</option><option value="biznes">бизнес</option><option value="lichniy">личный</option><option value="semya">семейный</option><option value="media">медиа и контент</option><option value="dannie">данные и аналитика</option><option value="monitoring">мониторинг</option></select></div>
     <div class="fg"><label>база данных</label><select id="f-db"><option value="all">любая</option><option value="sqlite">SQLite</option><option value="postgres">PostgreSQL</option><option value="sheets">Google Sheets</option><option value="none">без базы</option></select></div>
     <div class="fg"><label>расписание</label><select id="f-cron"><option value="all">любое</option><option value="yes">есть крон</option><option value="no">по вызову</option></select></div>
-    <div class="fg"><label>статус</label><select id="f-status"><option value="all">любой</option><option value="ok">работает</option><option value="wait">настраивается</option></select></div>
+    <div class="fg"><label>статус</label><select id="f-status"><option value="all">любой</option><option value="ok">работает</option><option value="wait">настраивается</option><option value="dev">в разработке</option></select></div>
     <button class="exp" id="expall">раскрыть все</button>
   </div>
 
   <div class="contour" data-c="yadro">
     <div class="contour-head" style="background:#e7eefb;color:#013CA4">Ядро <span class="ch-count">1</span></div>
     <div class="grid">
-      <div class="card agent" data-contour="yadro" data-db="none" data-cron="no" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1WNhqUbD33mEMKajn6WE3BrdeeERjxaJIwRxGmpj-qmQ/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Акс</div>
-        <div class="role">Единый вход и маршрутизатор. Ты пишешь только сюда</div>
-        <div class="pills"><span class="pill">координация</span><span class="pill">самопроверка</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> одно окно, вся команда за ним, собирает готовый ответ</div><div class="row"><b>Скиллы:</b> маршрутная логика, передачи между агентами, самопроверка</div><div class="row"><b>Кроны:</b> нет, работает в реальном времени</div><div class="row"><b>Доступы:</b> основной Telegram-контур, своей базы нет</div><div class="row"><b>Связи:</b> вызывает всех агентов, это его работа</div><div class="row"><b>Границы:</b> не делает работу специалистов сам, перед ответом проверяет маршрут</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="contour" data-c="lichniy">
-    <div class="contour-head" style="background:#e7f7ee;color:#1f7a4d">Личный контур <span class="ch-count">3</span></div>
-    <div class="grid">
-      <div class="card agent" data-contour="lichniy" data-db="sheets" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1skFm3M7QQY1Vr3rWQjxbG0DtxBRtnlR3glcpQ2kAPWc/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Пульс</div>
-        <div class="role">Чек-ины самочувствия, ритм дня, daily и weekly</div>
-        <div class="pills"><span class="pill">Sheets</span><span class="pill">крон</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> фиксировать состояние и видеть динамику самочувствия</div><div class="row"><b>Скиллы:</b> Google Sheets, чтение и запись</div><div class="row"><b>Кроны:</b> 10:00 утренний, 22:00 вечерний, выходные 12:00</div><div class="row"><b>Доступы:</b> таблица Пульс Самочувствие</div><div class="row"><b>Связи:</b> других не вызывает, работает по крону и через Акса</div><div class="row"><b>Границы:</b> только состояние, не бизнес, не задачи, не Психолог</div></div>
-      </div>
-      <div class="card agent" data-contour="lichniy" data-db="sheets" data-cron="no" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1VJN6VQzAHT96oFIDVRDZWyspjpGJp4K3HfS--49z9M8/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Психолог</div>
-        <div class="role">Эмоции, состояние, ясность и опора</div>
-        <div class="pills"><span class="pill">Sheets</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> помогать с состоянием, эмоциями и опорой</div><div class="row"><b>Скиллы:</b> Google Sheets только чтение</div><div class="row"><b>Кроны:</b> нет, по обращению</div><div class="row"><b>Доступы:</b> таблица Пульса только чтение</div><div class="row"><b>Связи:</b> других не вызывает, изолирован</div><div class="row"><b>Границы:</b> не диагностирует, не лечит, не заменяет врача, не видит бизнес</div></div>
-      </div>
-      <div class="card agent" data-contour="lichniy" data-db="sheets" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1ZeuoTllZph6FW-Qp-0iZwWEcw90JwhVTG6QI5Zk36VA/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Тичер</div>
-        <div class="role">Бытовой английский с нуля для жизни в Дубае</div>
-        <div class="pills"><span class="pill">Sheets</span><span class="pill">крон</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> учить простому английскому для повседневности</div><div class="row"><b>Скиллы:</b> Google Sheets, чтение и запись</div><div class="row"><b>Кроны:</b> 19:00 вечерний мини-урок</div><div class="row"><b>Доступы:</b> таблица прогресса английского</div><div class="row"><b>Связи:</b> других не вызывает, вне английского к Аксу</div><div class="row"><b>Границы:</b> только язык, ни бизнеса, ни личного</div></div>
-      </div>
+      <div class="card agent" data-contour="yadro" data-db="none" data-cron="no" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1VCbYvqUlLyIlafTaRyvfFn3ONS4DZuEsI5JVPdC9d6Q/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Акс</div><div class="role">Единый вход и дирижёр. Ты пишешь только сюда, он раздаёт задачи и собирает ответ</div><div class="rel">&#8594; вызывает всех агентов</div><div class="pills"><span class="pill">координация</span><span class="pill">самопроверка</span></div><div class="desc"><div class="row"><b>Цель:</b> операционная система дня, ты говоришь что нужно, он решает кто сделает</div><div class="row"><b>Связи:</b> вызывает всех, остальные между собой напрямую не общаются</div><div class="row"><b>Границы:</b> не делает работу специалистов, не смешивает личное и бизнес</div></div></div>
     </div>
   </div>
 
   <div class="contour" data-c="biznes">
-    <div class="contour-head" style="background:#e8eefc;color:#2d5bd0">Бизнес контур <span class="ch-count">5</span></div>
+    <div class="contour-head" style="background:#e8eefc;color:#2d5bd0">Бизнес контур <span class="ch-count">13</span></div>
     <div class="grid">
-      <div class="card agent" data-contour="biznes" data-db="sheets" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1baugumboX5tibPL7WRUV4TH8_Z6cN8PWcAlDXLjUAU8/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Ментор</div>
-        <div class="role">Бизнес-коуч и стратегический спарринг</div>
-        <div class="pills"><span class="pill">Sheets</span><span class="pill">Drive</span><span class="pill">крон</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> помогать с решениями, проектами, фиксировать выводы</div><div class="row"><b>Скиллы:</b> Google Sheets и Drive, чтение и запись</div><div class="row"><b>Кроны:</b> суббота 14:00, бизнес-разбор недели</div><div class="row"><b>Доступы:</b> бизнес-таблица, Пульс и контакты только чтение</div><div class="row"><b>Связи:</b> читает карточки Связного, сырые переписки не получает</div><div class="row"><b>Границы:</b> не ведёт чек-ины, не читает сырые переписки, не шлёт внешнее</div></div>
-      </div>
-      <div class="card agent" data-contour="biznes" data-db="sheets" data-cron="no" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1MR_oqNMwXhxbxNUIsq4fZV2V4BAZ5ayYfqQfzlIWg6k/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Диспетчер</div>
-        <div class="role">Постановка и ведение задач в Bitrix</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">Sheets</span><span class="pill">Bitrix</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> превращать решения в задачи и вести их</div><div class="row"><b>Скиллы:</b> exec, bash, Google Sheets и Drive</div><div class="row"><b>Кроны:</b> нет, по вызову</div><div class="row"><b>Доступы:</b> Bitrix, Google Sheets и Drive</div><div class="row"><b>Связи:</b> других не вызывает, вызывается Аксом</div><div class="row"><b>Границы:</b> без веба и браузера, не подменяет Ментора, Юриста, Финансиста</div></div>
-      </div>
-      <div class="card agent" data-contour="biznes" data-db="sheets" data-cron="no" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/12ukNCKLVbXLvHYxgS_OexgsoALFMDRx-87DyHTxiyeI/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Юрист</div>
-        <div class="role">Договоры, счета, акты, NDA строго по шаблонам</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">Drive</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> готовить документы только из утверждённых шаблонов</div><div class="row"><b>Скиллы:</b> exec, DOCX через docxtpl, Google Drive и Docs</div><div class="row"><b>Кроны:</b> нет, по вызову</div><div class="row"><b>Доступы:</b> папка шаблонов, реестр, реквизиты</div><div class="row"><b>Связи:</b> других не вызывает, вызывается Аксом</div><div class="row"><b>Границы:</b> с нуля не пишет, без файла-шаблона не выпускает документ</div></div>
-      </div>
-      <div class="card agent" data-contour="biznes" data-db="sqlite sheets" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1MgMZ7lDpBnvm2lfP2NZTJmNRBOn0gTVbD5ns2BTi32Y/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Связной</div>
-        <div class="role">Разведка сети и карточки контактов</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">tg-читает</span><span class="pill">база</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> вести карточки контактов из личных диалогов</div><div class="row"><b>Скиллы:</b> exec, tg-dialogues только чтение, Google Sheets</div><div class="row"><b>Кроны:</b> 12:00 и 18:00, до 5 контактов на разбор</div><div class="row"><b>Доступы:</b> база svyaznoy.sqlite, архив Telegram, таблица контактов</div><div class="row"><b>Связи:</b> отдаёт карточки Ментору, сырые переписки никому</div><div class="row"><b>Границы:</b> контактам не пишет, за карточки не выходит</div></div>
-      </div>
-      <div class="card agent" data-contour="biznes" data-db="sqlite" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1glENuyNL_-IHGluG1Tn4sDnU-UzESB-XkxqZOntEv5o/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Финансист</div>
-        <div class="role">Счета, поступления, финансовая аналитика</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">bash</span><span class="pill">база</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> следить за счетами и давать точные сводки</div><div class="row"><b>Скиллы:</b> exec, bash, скрипт T-Бизнес, SQLite</div><div class="row"><b>Кроны:</b> каждый час 11:00-17:00 МСК, мониторинг поступлений</div><div class="row"><b>Доступы:</b> T-Бизнес только чтение, база finance.sqlite, Adesk скоро</div><div class="row"><b>Связи:</b> других не вызывает, вызывается Аксом</div><div class="row"><b>Границы:</b> в банк только чтение, платежи не шлёт, цифры не выдумывает</div></div>
-      </div>
+      <div class="card agent" data-contour="biznes" data-db="sheets" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1baugumboX5tibPL7WRUV4TH8_Z6cN8PWcAlDXLjUAU8/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Ментор</div><div class="role">Бизнес-коуч и стратегический спарринг</div><div class="rel">&#8592; читает карточки Связного</div><div class="pills"><span class="pill">Sheets</span><span class="pill">Drive</span><span class="pill">крон</span></div><div class="desc"><div class="row"><b>Кроны:</b> суббота 14:00, разбор недели</div><div class="row"><b>Границы:</b> не ведёт задачи, не читает сырые переписки</div></div></div>
+      <div class="card agent" data-contour="biznes" data-db="sheets" data-cron="no" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1MR_oqNMwXhxbxNUIsq4fZV2V4BAZ5ayYfqQfzlIWg6k/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Диспетчер</div><div class="role">Постановка и ведение задач в Bitrix</div><div class="rel">&#8596; через Акса</div><div class="pills"><span class="pill">exec</span><span class="pill">Bitrix</span></div><div class="desc"><div class="row"><b>Кроны:</b> нет, по вызову</div><div class="row"><b>Границы:</b> только задачи, не документы и не деньги</div></div></div>
+      <div class="card agent" data-contour="biznes" data-db="sheets" data-cron="no" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/12ukNCKLVbXLvHYxgS_OexgsoALFMDRx-87DyHTxiyeI/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Юрист</div><div class="role">Договоры, счета, акты, NDA по шаблонам</div><div class="rel">&#8596; через Акса</div><div class="pills"><span class="pill">exec</span><span class="pill">Drive</span></div><div class="desc"><div class="row"><b>Кроны:</b> нет, по вызову</div><div class="row"><b>Границы:</b> с нуля не пишет, без шаблона не выпускает</div></div></div>
+      <div class="card agent" data-contour="biznes" data-db="sqlite sheets" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1MgMZ7lDpBnvm2lfP2NZTJmNRBOn0gTVbD5ns2BTi32Y/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Связной</div><div class="role">Разведка сети и карточки контактов</div><div class="rel">&#8594; отдаёт карточки Ментору</div><div class="pills"><span class="pill">exec</span><span class="pill">tg-читает</span><span class="pill">база</span></div><div class="desc"><div class="row"><b>Кроны:</b> 12:00 и 18:00, контакты на разбор</div><div class="row"><b>Границы:</b> сырые переписки никому, контактам не пишет</div></div></div>
+      <div class="card agent" data-contour="biznes" data-db="sqlite" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1glENuyNL_-IHGluG1Tn4sDnU-UzESB-XkxqZOntEv5o/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Финансист</div><div class="role">Счета, поступления, финансовая аналитика</div><div class="rel">&#8596; через Акса</div><div class="pills"><span class="pill">exec</span><span class="pill">bash</span><span class="pill">база</span></div><div class="desc"><div class="row"><b>Кроны:</b> каждый час 11-17 МСК, мониторинг</div><div class="row"><b>Границы:</b> в банк только чтение, платежи не шлёт</div></div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Сделки</div><div class="role">Воронка сделок в Bitrix, стадии, суммы, что двигать</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Клиент-менеджер</div><div class="role">Переписка с клиентами, ответы, follow-up, не теряет никого</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Питч</div><div class="role">Коммерческие предложения в фирменном стиле за минуты</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Найм</div><div class="role">Воронка найма, тесты кандидатов, адаптация новичков</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Дебиторка</div><div class="role">Следит за долгами и просрочками, напоминает, эскалирует</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Отчётность</div><div class="role">Управленческие сводки и KPI для тебя и команды</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Секретарь встреч</div><div class="role">Расшифровка созвонов, протоколы, задачи из встреч</div></div>
+      <div class="card agent dev" data-contour="biznes" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Продажи</div><div class="role">Анализ звонков отдела продаж, качество, кто как продаёт</div></div>
     </div>
   </div>
 
-  <div class="contour" data-c="novostnoy">
-    <div class="contour-head" style="background:#fbf0dc;color:#a5700a">Новостной контур <span class="ch-count">2</span></div>
+  <div class="contour" data-c="lichniy">
+    <div class="contour-head" style="background:#e7f7ee;color:#1f7a4d">Личный контур <span class="ch-count">12</span></div>
     <div class="grid">
-      <div class="card agent" data-contour="novostnoy" data-db="sqlite" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1jZpQgJOeN10W12VAgx4nGQU-cDC_qbdceyfMhMyox2g/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Радар</div>
-        <div class="role">Ежедневный сбор AI-новостей и сигналов</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">web</span><span class="pill">база</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> искать свежие AI-новости и складывать в базу</div><div class="row"><b>Скиллы:</b> exec, веб-поиск и загрузка страниц</div><div class="row"><b>Кроны:</b> 09:00 сбор AI-сигналов</div><div class="row"><b>Доступы:</b> веб, база news.sqlite</div><div class="row"><b>Связи:</b> других не вызывает, пишет в базу для Аналитика</div><div class="row"><b>Границы:</b> не анализирует, факты не выдумывает, в Telegram не шлёт</div></div>
-      </div>
-      <div class="card agent" data-contour="novostnoy" data-db="sqlite" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1QRmMpiX8hwAEggTIu24xNiAtm6gJJumxz7qOfFNQuas/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Аналитик</div>
-        <div class="role">Анализ сигналов и ежедневный отчёт рынка</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">Drive</span><span class="pill">база</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> превращать новости в сигналы, метрики и отчёт</div><div class="row"><b>Скиллы:</b> exec, bash, Google Drive</div><div class="row"><b>Кроны:</b> 10:30 отчёт рынка в группу</div><div class="row"><b>Доступы:</b> база Радара news.sqlite</div><div class="row"><b>Связи:</b> читает базу Радара, публикует через крон</div><div class="row"><b>Границы:</b> бюджеты не выдумывает, связь с AI не завышает</div></div>
-      </div>
+      <div class="card agent" data-contour="lichniy" data-db="sheets" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1skFm3M7QQY1Vr3rWQjxbG0DtxBRtnlR3glcpQ2kAPWc/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Пульс</div><div class="role">Чек-ины самочувствия, ритм дня</div><div class="rel">&#8596; через Акса</div><div class="pills"><span class="pill">Sheets</span><span class="pill">крон</span></div><div class="desc"><div class="row"><b>Кроны:</b> 10:00, 22:00, выходные 12:00</div><div class="row"><b>Границы:</b> только состояние, не бизнес</div></div></div>
+      <div class="card agent" data-contour="lichniy" data-db="sheets" data-cron="no" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1VJN6VQzAHT96oFIDVRDZWyspjpGJp4K3HfS--49z9M8/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Психолог</div><div class="role">Эмоции, состояние, ясность и опора</div><div class="rel">&#8596; через Акса, изолирован</div><div class="pills"><span class="pill">Sheets</span></div><div class="desc"><div class="row"><b>Кроны:</b> нет, по обращению</div><div class="row"><b>Границы:</b> не лечит, не видит бизнес</div></div></div>
+      <div class="card agent" data-contour="lichniy" data-db="sheets" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1ZeuoTllZph6FW-Qp-0iZwWEcw90JwhVTG6QI5Zk36VA/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Тичер</div><div class="role">Бытовой английский с нуля</div><div class="rel">&#8596; через Акса</div><div class="pills"><span class="pill">Sheets</span><span class="pill">крон</span></div><div class="desc"><div class="row"><b>Кроны:</b> 19:00 мини-урок</div><div class="row"><b>Границы:</b> только язык</div></div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Нутрициолог</div><div class="role">Питание, рацион, БЖУ, советы по еде и подсчёт</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Фитнес-тренер</div><div class="role">План тренировок, нагрузка, прогресс</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Доктор</div><div class="role">Напоминает про лекарства, хранит анализы, ведёт чек-апы</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Сон-коуч</div><div class="role">Режим и гигиена сна, подъёмы, качество сна</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Привычки</div><div class="role">Трекер целей и привычек, серии, дисциплина</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Travel</div><div class="role">Поездки, маршруты, брони, чек-листы сборов</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Личный бюджет</div><div class="role">Личные траты отдельно от бизнеса</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Кругозор</div><div class="role">Книги, статьи, саммари, что почитать и посмотреть</div></div>
+      <div class="card agent dev" data-contour="lichniy" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Стилист</div><div class="role">Гардероб, образы, покупки одежды</div></div>
+    </div>
+  </div>
+
+  <div class="contour" data-c="semya">
+    <div class="contour-head" style="background:#fbeee6;color:#c2410c">Семейный контур <span class="ch-count">4</span></div>
+    <div class="grid">
+      <div class="card agent dev" data-contour="semya" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Репетитор</div><div class="role">Помогает детям с учёбой и ЕГЭ, домашки, объяснения</div></div>
+      <div class="card agent dev" data-contour="semya" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Секции</div><div class="role">Записывает детей в кружки, расписание и напоминания</div></div>
+      <div class="card agent dev" data-contour="semya" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Семейный дневник</div><div class="role">Журнал моментов и хроника семьи, заметки и фото</div></div>
+      <div class="card agent dev" data-contour="semya" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Здоровье семьи</div><div class="role">Анализы, прививки, визиты к врачу по всем членам семьи</div></div>
+    </div>
+  </div>
+
+  <div class="contour" data-c="media">
+    <div class="contour-head" style="background:#fbf0dc;color:#a5700a">Медиа и контент <span class="ch-count">5</span></div>
+    <div class="grid">
+      <div class="card agent" data-contour="media" data-db="sqlite" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1jZpQgJOeN10W12VAgx4nGQU-cDC_qbdceyfMhMyox2g/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Радар</div><div class="role">Ежедневный сбор AI-новостей и сигналов</div><div class="rel">&#8594; база Аналитику</div><div class="pills"><span class="pill">exec</span><span class="pill">web</span><span class="pill">база</span></div><div class="desc"><div class="row"><b>Кроны:</b> 09:00 сбор сигналов</div><div class="row"><b>Границы:</b> только сбор, не анализ</div></div></div>
+      <div class="card agent dev" data-contour="media" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Контент-мейкер</div><div class="role">Пишет посты и статьи под Facebook, LinkedIn и сайт</div></div>
+      <div class="card agent dev" data-contour="media" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">SMM-планер</div><div class="role">Контент-план и расписание публикаций</div></div>
+      <div class="card agent dev" data-contour="media" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Публикатор</div><div class="role">Раскладывает готовый контент по площадкам</div></div>
+      <div class="card agent dev" data-contour="media" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Парсер ивентов и календарь</div><div class="role">Находит конференции и нетворкинг, пишет в календарь</div></div>
     </div>
   </div>
 
   <div class="contour" data-c="dannie">
-    <div class="contour-head" style="background:#f0eafb;color:#6b4fb0">Данные и витрина <span class="ch-count">1</span></div>
+    <div class="contour-head" style="background:#f0eafb;color:#6b4fb0">Данные и аналитика <span class="ch-count">3</span></div>
     <div class="grid">
-      <div class="card agent" data-contour="dannie" data-db="postgres" data-cron="yes" data-status="wait">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1hhlXd3_11jotN7CLUci3qp0CSKzEHeyLeSyPxev-OHU/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot da"></span>Дашборд</div>
-        <div class="role">Сводит данные агентов в базу для витрины</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">bash</span><span class="pill">Postgres</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> собрать готовые данные в общую базу для дашборда</div><div class="row"><b>Скиллы:</b> exec, bash, Google Drive и Sheets</div><div class="row"><b>Кроны:</b> ежедневное обновление, время уточняется</div><div class="row"><b>Доступы:</b> PostgreSQL vitrina_db, источники подключаются отдельно</div><div class="row"><b>Связи:</b> читает готовые данные Финансиста, Связного, Радара и других</div><div class="row"><b>Границы:</b> в чужие источники не лезет, берёт только готовое</div></div>
-      </div>
+      <div class="card agent" data-contour="dannie" data-db="sqlite" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1QRmMpiX8hwAEggTIu24xNiAtm6gJJumxz7qOfFNQuas/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Аналитик</div><div class="role">Анализ сигналов и ежедневный отчёт рынка</div><div class="rel">&#8592; читает базу Радара</div><div class="pills"><span class="pill">exec</span><span class="pill">база</span></div><div class="desc"><div class="row"><b>Кроны:</b> 10:30 отчёт в группу</div><div class="row"><b>Границы:</b> бюджеты не выдумывает</div></div></div>
+      <div class="card agent" data-contour="dannie" data-db="postgres" data-cron="yes" data-status="wait"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1hhlXd3_11jotN7CLUci3qp0CSKzEHeyLeSyPxev-OHU/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot da"></span>Дашборд</div><div class="role">Сводит данные агентов в базу для витрины</div><div class="rel">&#8592; данные агентов</div><div class="pills"><span class="pill">exec</span><span class="pill">Postgres</span></div><div class="desc"><div class="row"><b>Кроны:</b> ежедневное обновление</div><div class="row"><b>Границы:</b> берёт только готовое, сырое не идёт</div></div></div>
+      <div class="card agent dev" data-contour="dannie" data-db="none" data-cron="no" data-status="dev"><span class="devbadge">в разработке</span><div class="nm">Предиктор</div><div class="role">Прогнозы и тренды по накопленным данным</div></div>
     </div>
   </div>
 
   <div class="contour" data-c="monitoring">
     <div class="contour-head" style="background:#eef0f2;color:#5a6470">Мониторинг и качество <span class="ch-count">3</span></div>
     <div class="grid">
-      <div class="card agent" data-contour="monitoring" data-db="sqlite" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1DqfKRWxtOELyOqHTRMUcSYRYE09SKMfcc80lyJNNwe0/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Аудитор</div>
-        <div class="role">Наблюдатель системы, журнал, ошибки, границы</div>
-        <div class="pills"><span class="pill">exec</span><span class="pill">sessions</span><span class="pill">крон</span><span class="pill">база</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> следить за системой и давать сводку, где болит</div><div class="row"><b>Скиллы:</b> sessions, cron, exec</div><div class="row"><b>Кроны:</b> 06:00 проверка, 06:30 журнал качества</div><div class="row"><b>Доступы:</b> база audit.sqlite, чтение сессий, security без deep</div><div class="row"><b>Связи:</b> читает сессии всех для наблюдения, принимает записи Контролёра</div><div class="row"><b>Границы:</b> сам не чинит, полные тексты не хранит, только фиксирует</div></div>
-      </div>
-      <div class="card agent" data-contour="monitoring" data-db="none" data-cron="yes" data-status="ok">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1C5wwTUts1CjMZ92TsT1JldhTnOWm5SaH8aqgfUEDcjk/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot dg"></span>Советник</div>
-        <div class="role">Рекомендации по развитию системы</div>
-        <div class="pills"><span class="pill">чтение</span><span class="pill">web</span><span class="pill">крон</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> смотреть на систему сверху и предлагать улучшения</div><div class="row"><b>Скиллы:</b> чтение источников, веб-поиск</div><div class="row"><b>Кроны:</b> понедельник 10:00, недельный обзор</div><div class="row"><b>Доступы:</b> read-only источники, документация, веб</div><div class="row"><b>Связи:</b> других не вызывает, только читает и советует</div><div class="row"><b>Границы:</b> руками ничего не меняет, только рекомендации</div></div>
-      </div>
-      <div class="card agent" data-contour="monitoring" data-db="sqlite" data-cron="no" data-status="wait">
-        <div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/13iEiSnIiFXL32wKSO_6vtUWmgGrCw9IcWtNiCn-nUCo/edit" target="_blank" title="полный документ">&#8599;</a></div>
-        <div class="nm"><span class="dot da"></span>Контролёр</div>
-        <div class="role">Проверка маршрутов Акса, разворот при ошибке</div>
-        <div class="pills"><span class="pill">sessions</span><span class="pill">exec</span></div>
-        <div class="desc"><div class="row"><b>Цель:</b> ловить, если Акс позвал не того агента</div><div class="row"><b>Скиллы:</b> sessions, exec</div><div class="row"><b>Кроны:</b> нет, срабатывает на ответах Акса</div><div class="row"><b>Доступы:</b> запись в базу Аудитора</div><div class="row"><b>Связи:</b> разворачивает Акса, пишет события Аудитору</div><div class="row"><b>Границы:</b> ответы не переписывает, только правит маршрут</div></div>
-      </div>
+      <div class="card agent" data-contour="monitoring" data-db="sqlite" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1DqfKRWxtOELyOqHTRMUcSYRYE09SKMfcc80lyJNNwe0/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Аудитор</div><div class="role">Наблюдатель системы, журнал, ошибки, границы</div><div class="rel">&#8592; сессии всех агентов</div><div class="pills"><span class="pill">exec</span><span class="pill">sessions</span><span class="pill">крон</span><span class="pill">база</span></div><div class="desc"><div class="row"><b>Кроны:</b> 06:00 проверка, 06:30 журнал</div><div class="row"><b>Границы:</b> сам не чинит, только фиксирует</div></div></div>
+      <div class="card agent" data-contour="monitoring" data-db="none" data-cron="yes" data-status="ok"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/1C5wwTUts1CjMZ92TsT1JldhTnOWm5SaH8aqgfUEDcjk/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot dg"></span>Советник</div><div class="role">Рекомендации по развитию системы</div><div class="rel">— только читает</div><div class="pills"><span class="pill">чтение</span><span class="pill">web</span><span class="pill">крон</span></div><div class="desc"><div class="row"><b>Кроны:</b> понедельник 10:00</div><div class="row"><b>Границы:</b> руками ничего не меняет</div></div></div>
+      <div class="card agent" data-contour="monitoring" data-db="sqlite" data-cron="no" data-status="wait"><div class="icons"><button class="ib qb">?</button><a class="ib" href="https://docs.google.com/document/d/13iEiSnIiFXL32wKSO_6vtUWmgGrCw9IcWtNiCn-nUCo/edit" target="_blank">&#8599;</a></div><div class="nm"><span class="dot da"></span>Контролёр</div><div class="role">Проверка маршрутов Акса, разворот при ошибке</div><div class="rel">&#8594; пишет Аудитору</div><div class="pills"><span class="pill">sessions</span><span class="pill">exec</span></div><div class="desc"><div class="row"><b>Кроны:</b> нет, на ответах Акса</div><div class="row"><b>Границы:</b> ответы не переписывает, только маршрут</div></div></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="pane" id="p-users">
+    <div class="note">Люди с доступом к системе. Имена уточняются, семейный контур добавит новых пользователей</div>
+    <div class="grid" style="margin-top:12px">
+      <div class="lcard"><div class="t"><span class="dot dg"></span>Антон Чернобаев</div><div class="m">владелец, полный доступ ко всей системе</div><div class="id">280369346</div></div>
+      <div class="lcard"><div class="t"><span class="dot da"></span>Пользователь</div><div class="m">в allowlist, доступ уточняется</div><div class="id">5052001144</div></div>
+      <div class="lcard"><div class="t"><span class="dot da"></span>Пользователь</div><div class="m">в allowlist, доступ уточняется</div><div class="id">1369928585</div></div>
     </div>
   </div>
 
-  <div class="contour-head" style="background:#eef0f2;color:#5a6470;margin-top:26px">Базы данных и интеграции</div>
-  <div class="grid">
-    <div class="card base"><div class="nm">finance.sqlite</div><div class="tbl">payments, account_snapshots, daily_summaries</div><div class="role" style="margin:8px 0 0;color:var(--blue)">хозяин: Финансист</div></div>
-    <div class="card base"><div class="nm">svyaznoy.sqlite</div><div class="tbl">contacts, contact_fact_index, contact_asset_summary</div><div class="role" style="margin:8px 0 0;color:var(--blue)">хозяин: Связной</div></div>
-    <div class="card base"><div class="nm">news.sqlite</div><div class="tbl">ai_signal_registry, raw_news_ingest, daily_analysis_report</div><div class="role" style="margin:8px 0 0;color:var(--blue)">хозяева: Радар, Аналитик</div></div>
-    <div class="card base"><div class="nm">audit.sqlite</div><div class="tbl">events, system_registry, errors, integration_health, boundary_violations</div><div class="role" style="margin:8px 0 0;color:var(--blue)">хозяин: Аудитор</div></div>
-    <div class="card base"><div class="nm">vitrina_db · PostgreSQL</div><div class="tbl">витринные таблицы, пока пусто</div><div class="role" style="margin:8px 0 0;color:var(--blue)">хозяин: Дашборд</div></div>
-    <div class="card base"><div class="nm">Google Sheets</div><div class="tbl">Пульс, Связной контакты, реестр Юриста</div><div class="role" style="margin:8px 0 0;color:var(--blue)">общий слой таблиц</div></div>
-    <div class="card base"><div class="nm">Внешние API</div><div class="tbl">Bitrix, T-Bank, Adesk, Telegram архив</div><div class="role" style="margin:8px 0 0;color:var(--blue)">через своих агентов</div></div>
+  <div class="pane" id="p-groups">
+    <div class="note">Telegram-чаты системы. Часть заведена под отдельных агентов</div>
+    <div class="grid" style="margin-top:12px">
+      <div class="lcard"><div class="t">Основной чат</div><div class="m">рабочий чат с системой, вход через Акса, сюда идут сводки Финансиста и отчёт рынка</div><div class="id">-1003097588708</div></div>
+      <div class="lcard"><div class="t">Связной</div><div class="m">чат агента Связной, карточки контактов и верификация</div><div class="id">-1004084426737</div></div>
+      <div class="lcard"><div class="t">Аудит</div><div class="m">сводки Аудитора и события Контролёра</div><div class="id">-1004441008201</div></div>
+    </div>
   </div>
 
-  <footer>Личное и бизнес разделены по доступу. Сырые переписки заперты в Связном, наружу только карточки. Единый вход через Акса</footer>
+  <div class="pane" id="p-bots">
+    <div class="note">Telegram-боты, через которые идёт вход в систему</div>
+    <div class="grid" style="margin-top:12px">
+      <div class="lcard"><div class="t"><span class="dot dg"></span>Акс</div><div class="m">основной бот, единый вход в систему, голос и текст</div></div>
+      <div class="lcard"><div class="t"><span class="dot dd"></span>Второй Акс</div><div class="m">быстрый чат для мелких бытовых вопросов, в планах</div></div>
+    </div>
+  </div>
+
+  <div class="contour-head" style="background:#eef0f2;color:#5a6470;margin-top:26px" id="db-head">Базы данных и интеграции</div>
+  <div class="grid" id="db-grid">
+    <div class="card base"><div class="nm">finance.sqlite</div><div class="tbl">payments, account_snapshots, daily_summaries</div><div class="rel" style="margin-top:8px">хозяин: Финансист</div></div>
+    <div class="card base"><div class="nm">svyaznoy.sqlite</div><div class="tbl">contacts, contact_fact_index, contact_asset_summary</div><div class="rel" style="margin-top:8px">хозяин: Связной</div></div>
+    <div class="card base"><div class="nm">news.sqlite</div><div class="tbl">ai_signal_registry, raw_news_ingest, daily_analysis_report</div><div class="rel" style="margin-top:8px">хозяева: Радар, Аналитик</div></div>
+    <div class="card base"><div class="nm">audit.sqlite</div><div class="tbl">events, system_registry, errors, integration_health, boundary_violations</div><div class="rel" style="margin-top:8px">хозяин: Аудитор</div></div>
+    <div class="card base"><div class="nm">vitrina_db · PostgreSQL</div><div class="tbl">витринные таблицы, пока пусто</div><div class="rel" style="margin-top:8px">хозяин: Дашборд</div></div>
+    <div class="card base"><div class="nm">Google Sheets</div><div class="tbl">Пульс, Связной контакты, реестр Юриста</div><div class="rel" style="margin-top:8px">общий слой таблиц</div></div>
+    <div class="card base"><div class="nm">Внешние API</div><div class="tbl">Bitrix, T-Bank, Adesk, Telegram архив</div><div class="rel" style="margin-top:8px">через своих агентов</div></div>
+  </div>
+
+  <footer>Личное, бизнес и семья разделены по доступу. Сырые переписки заперты в Связном, наружу только карточки. Единый вход через Акса</footer>
 </div>
 
 <script>
+  var tabs=document.querySelectorAll('.tab'),panes={agents:'p-agents',users:'p-users',groups:'p-groups',bots:'p-bots'};
+  var dbh=document.getElementById('db-head'),dbg=document.getElementById('db-grid');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.classList.remove('on')});t.classList.add('on');
+    var key=t.dataset.t;for(var k in panes){document.getElementById(panes[k]).classList.toggle('on',k===key)}
+    var s=key==='agents'?'':'none';dbh.style.display=s;dbg.style.display=s;
+  })});
   var fc=document.getElementById('f-contour'),fd=document.getElementById('f-db'),fk=document.getElementById('f-cron'),fs=document.getElementById('f-status');
-  function apply(){
-    var c=fc.value,d=fd.value,k=fk.value,s=fs.value;
-    document.querySelectorAll('.contour').forEach(function(sec){
-      var any=false;
+  function apply(){var c=fc.value,d=fd.value,k=fk.value,s=fs.value;
+    document.querySelectorAll('.contour').forEach(function(sec){var any=false;
       sec.querySelectorAll('.agent').forEach(function(a){
-        var okc=c==='all'||a.dataset.contour===c;
-        var okd=d==='all'||((' '+a.dataset.db+' ').indexOf(' '+d+' ')>=0);
-        var okk=k==='all'||a.dataset.cron===k;
-        var oks=s==='all'||a.dataset.status===s;
-        var show=okc&&okd&&okk&&oks;
-        a.style.display=show?'':'none';
-        if(show)any=true;
-      });
-      sec.style.display=any?'':'none';
-    });
-  }
+        var show=(c==='all'||a.dataset.contour===c)&&(d==='all'||((' '+a.dataset.db+' ').indexOf(' '+d+' ')>=0))&&(k==='all'||a.dataset.cron===k)&&(s==='all'||a.dataset.status===s);
+        a.style.display=show?'':'none';if(show)any=true;});
+      sec.style.display=any?'':'none';});}
   [fc,fd,fk,fs].forEach(function(e){e.addEventListener('change',apply)});
   document.querySelectorAll('.qb').forEach(function(q){q.addEventListener('click',function(){q.closest('.card').classList.toggle('open')})});
-  var expall=document.getElementById('expall'),open=false;
-  expall.addEventListener('click',function(){
-    open=!open;
-    document.querySelectorAll('.card.agent').forEach(function(a){a.classList.toggle('open',open)});
-    expall.textContent=open?'свернуть все':'раскрыть все';
-  });
+  var expall=document.getElementById('expall'),op=false;
+  expall.addEventListener('click',function(){op=!op;document.querySelectorAll('.card.agent:not(.dev)').forEach(function(a){a.classList.toggle('open',op)});expall.textContent=op?'свернуть все':'раскрыть все';});
 </script>
 </body>
 </html>
