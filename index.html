@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Карта системы MakeBiz</title>
 <style>
   :root{--bg:#f6f7f9;--card:#fff;--border:#e6e8ec;--tp:#1a1d21;--ts:#5f6b7a;--tm:#98a1ad;--green:#1f9d55;--amber:#d9880a;--dev:#5566a0;--wait-bg:#fef8ec;--pill:#f2f4f7}
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--tp);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  body{margin:0;background:var(--bg);color:var(--tp);font-family:"Golos Text",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
   .page{max-width:1180px;margin:0 auto;padding:32px 20px 60px}
   .logo{margin-bottom:12px}
   .logo svg{height:40px;width:auto;display:block}
@@ -140,9 +141,11 @@
   footer{margin-top:40px;font-size:12.5px;color:var(--tm);border-top:1px solid var(--border);padding-top:16px}
   @media (max-width:640px){
     h1{font-size:21px}
-    .page{padding:22px 12px 40px}
-    .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
-    .tab{white-space:nowrap;padding:9px 12px}
+    .page{padding:20px 12px 40px}
+    .topnav-in{padding:8px 12px;gap:10px}
+    .topnav .logo svg{height:26px}
+    .nav .tab{white-space:nowrap;padding:8px 10px;font-size:13px}
+    .cta{padding:8px 12px;font-size:12px}
     .stat{min-width:calc(50% - 5px);flex:1 1 calc(50% - 5px);padding:9px 12px}
     .stat b{font-size:20px}
     .brow .bn{width:96px;font-size:11.5px} .brow .bv{width:48px}
@@ -150,11 +153,48 @@
     .heat{font-size:9px;gap:2px}
     .effsec{padding:14px 12px}
     .metrics{gap:14px}
-    .card{padding:14px 14px 14px 18px}
+    .grid{grid-template-columns:1fr}
+    .card{height:auto;overflow:visible;padding:14px 14px 14px 18px}
     .card.wide{padding:14px 14px 14px 18px} .wside{min-width:0;width:100%}
     .apick-top{gap:8px} .apick-top select{flex:1 1 100%}
     .akpi{min-width:calc(33% - 7px);flex:1 1 calc(33% - 7px)}
+    .gaugewrap .gv{font-size:24px;min-width:64px}
+    .days{height:130px}
   }
+  @media (min-width:641px) and (max-width:900px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .dgrid{grid-template-columns:1fr}
+    .stat{min-width:calc(33% - 7px);flex:1 1 calc(33% - 7px)}
+    .topnav-in{padding:9px 16px;gap:12px}
+  }
+  .topnav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(20,25,35,.05)}
+  .topnav-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:9px 20px}
+  .topnav .logo{margin:0;flex:none}
+  .topnav .logo svg{height:30px}
+  .nav{display:flex;gap:4px;flex:1;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav .tab{white-space:nowrap;border:none;border-radius:8px;padding:8px 13px;font-size:14px;font-weight:500;margin:0;color:var(--ts);cursor:pointer;background:none}
+  .nav .tab:hover{background:#f4f6f9}
+  .nav .tab.on{background:#eef3fb;color:#013CA4;font-weight:600}
+  .cta{flex:none;background:#013CA4;color:#fff;font-size:13px;font-weight:600;padding:9px 16px;border-radius:9px;text-decoration:none;white-space:nowrap}
+  .cta:hover{background:#012f80}
+  .card{height:318px}
+  .card.open{height:auto;overflow:visible}
+  .card.wide{height:auto;overflow:visible}
+  .gaugewrap{display:flex;align-items:center;gap:16px;margin-top:8px}
+  .gaugewrap .gv{font-size:30px;font-weight:700;color:var(--tp);flex:none;min-width:78px}
+  .gbar{flex:1;height:14px;background:#edeff2;border-radius:7px;overflow:hidden}
+  .gbar i{display:block;height:100%;border-radius:7px}
+  .gbar.green i{background:linear-gradient(90deg,#1f9d55,#37c46e)}
+  .gbar.blue i{background:linear-gradient(90deg,#013CA4,#3d78e0)}
+  .segbtns{display:flex;gap:3px;background:#f0f1f4;padding:3px;border-radius:9px;flex-wrap:wrap}
+  .seg{border:none;background:none;font-size:12px;padding:5px 11px;border-radius:7px;cursor:pointer;color:var(--ts)}
+  .seg.on{background:#fff;color:#013CA4;font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .days{display:flex;align-items:flex-end;gap:3px;height:160px;margin-top:14px}
+  .day2{flex:1;background:linear-gradient(180deg,#3d78e0,#013CA4);border-radius:3px 3px 0 0;min-height:2px}
+  .dayx{display:flex;justify-content:space-between;font-size:10.5px;color:var(--tm);margin-top:6px}
+  .lcard a.tglink{color:#013CA4;font-size:12.5px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;margin-top:8px}
+  .lcard a.tglink:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -182,9 +222,15 @@
 <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></symbol>
 </defs></svg>
 
+<header class="topnav"><div class="topnav-in"><div class="logo"><svg width="117" height="41" viewBox="0 0 117 41" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_12_2101)"><path d="M32.2077 24.0427H3.48188C1.55887 24.0427 -3.05176e-05 25.6016 -3.05176e-05 27.5246V36.2294C-3.05176e-05 38.1524 1.55887 39.7113 3.48188 39.7113H32.2077C34.1307 39.7113 35.6896 38.1524 35.6896 36.2294V27.5246C35.6896 25.6016 34.1307 24.0427 32.2077 24.0427Z" fill="#013CA4"/><path d="M20.8571 35.7816H18.932L18.4448 34.4388H15.0461L14.547 35.7816H12.6219L15.6878 27.8553H17.8031L20.8571 35.7816ZM17.9813 32.9533L16.7455 29.5428L15.5096 32.9533H17.9813Z" fill="white"/><path d="M23.2766 35.7816H21.5891V27.8553H23.2766V35.7816Z" fill="white"/><path d="M112.727 24.0427H80.084C78.161 24.0427 76.6021 25.6016 76.6021 27.5246V36.2294C76.6021 38.1524 78.161 39.7113 80.084 39.7113H112.727C114.65 39.7113 116.209 38.1524 116.209 36.2294V27.5246C116.209 25.6016 114.65 24.0427 112.727 24.0427Z" fill="#C51929"/><path d="M88.4257 36.0199C85.9331 36.0199 84.0011 34.275 84.0011 31.72C84.0011 29.165 85.9331 27.42 88.4257 27.42C90.2577 27.42 91.317 28.4171 91.9029 29.4516L90.3826 30.1994C90.0335 29.5264 89.2858 28.9904 88.4257 28.9904C86.9176 28.9904 85.8208 30.1496 85.8208 31.72C85.8208 33.2904 86.9176 34.4495 88.4257 34.4495C89.2858 34.4495 90.0335 33.926 90.3826 33.2405L91.9029 33.9759C91.3048 35.0103 90.2577 36.0199 88.4257 36.0199Z" fill="white"/><path d="M99.1883 35.8703H97.1566L95.524 32.9164H94.2279V35.8703H92.4578V27.5571H96.3466C98.0789 27.5571 99.1383 28.6913 99.1383 30.2368C99.1383 31.7075 98.216 32.4927 97.3185 32.7046L99.1883 35.8703ZM96.0846 31.3585C96.7954 31.3585 97.3311 30.9348 97.3311 30.2368C97.3311 29.5388 96.7954 29.1151 96.0846 29.1151H94.2279V31.3585H96.0846Z" fill="white"/><path d="M108.979 35.8703H107.197V30.0498L104.854 35.8703H104.081L101.738 30.0498V35.8703H99.9683V27.5571H102.448L104.467 32.5799L106.486 27.5571H108.979V35.8703Z" fill="white"/><path d="M71.8144 24.0427H40.4772C38.5542 24.0427 36.9953 25.6016 36.9953 27.5246V36.2294C36.9953 38.1524 38.5542 39.7113 40.4772 39.7113H71.8144C73.7374 39.7113 75.2963 38.1524 75.2963 36.2294V27.5246C75.2963 25.6016 73.7374 24.0427 71.8144 24.0427Z" fill="#013CA4"/><path d="M55.8655 36.5266H50.9229V27.42H55.7153C57.4489 27.42 58.3363 28.5259 58.3363 29.741C58.3363 30.8879 57.6265 31.6525 56.7664 31.83C57.7357 31.9802 58.5139 32.9222 58.5139 34.0691C58.5139 35.4344 57.599 36.5266 55.8655 36.5266ZM55.2918 31.0654C55.9473 31.0654 56.3569 30.6558 56.3569 30.0824C56.3569 29.509 55.9473 29.0857 55.2918 29.0857H52.8615V31.0654H55.2918ZM55.3602 34.8473C56.0975 34.8473 56.5345 34.4514 56.5345 33.796C56.5345 33.2226 56.1249 32.7311 55.3602 32.7311H52.8615V34.8473H55.3602Z" fill="white"/><path d="M61.3687 36.5266H59.4301V27.42H61.3687V36.5266Z" fill="white"/><path d="M22.307 21.1654H17.8949V6.75688L12.0945 21.1654H10.1816L4.38117 6.75688V21.1654H-3.05176e-05V0.586182H6.1398L11.138 13.0201L16.1363 0.586182H22.307V21.1654Z" fill="#03235F"/><path d="M39.1674 21.1653H35.249V19.6227C34.2309 20.826 32.4722 21.5356 30.5284 21.5356C28.1527 21.5356 25.3451 19.9312 25.3451 16.5991C25.3451 13.1126 28.1527 11.7859 30.5284 11.7859C32.5031 11.7859 34.2617 12.4338 35.249 13.6063V11.6008C35.249 10.089 33.9532 9.1017 31.9786 9.1017C30.3742 9.1017 28.8932 9.68792 27.6282 10.8603L26.1473 8.23779C27.9676 6.63342 30.3125 5.89294 32.6573 5.89294C36.0512 5.89294 39.1674 7.2505 39.1674 11.5391V21.1653ZM32.102 18.8822C33.367 18.8822 34.6011 18.4503 35.249 17.5864V15.7352C34.6011 14.8713 33.367 14.4393 32.102 14.4393C30.5593 14.4393 29.2943 15.2415 29.2943 16.6916C29.2943 18.08 30.5593 18.8822 32.102 18.8822Z" fill="#03235F"/><path d="M57.6169 21.1654H52.7108L48.7619 15.4267L46.9722 17.3396V21.1654H43.0539V0.586182H46.9722V12.8967L52.6186 6.26319H57.4314L51.5387 13.0201L57.6169 21.1654Z" fill="#03235F"/><path d="M66.3882 21.5356C61.8526 21.5356 58.4282 18.4811 58.4282 13.6988C58.4282 9.37938 61.6058 5.89294 66.1415 5.89294C70.5844 5.89294 73.608 9.22509 73.608 14.0999V14.9638H62.5316C62.7784 16.8459 64.2904 18.4194 66.82 18.4194C68.0852 18.4194 69.8436 17.8641 70.8003 16.9384L72.5282 19.4684C71.047 20.826 68.7024 21.5356 66.3882 21.5356ZM69.8131 12.3105C69.7204 10.8912 68.7333 9.00912 66.1415 9.00912C63.7041 9.00912 62.6548 10.8295 62.4698 12.3105H69.8131Z" fill="#03235F"/><path d="M87.6997 21.1654H76.5306V0.586182H87.3603C91.2787 0.586182 93.2843 3.08531 93.2843 5.83125C93.2843 8.42293 91.68 10.1507 89.7362 10.5518C91.9268 10.8912 93.6851 13.0201 93.6851 15.6118C93.6851 18.6971 91.6182 21.1654 87.6997 21.1654ZM86.404 8.82404C87.8847 8.82404 88.8105 7.89842 88.8105 6.60259C88.8105 5.30675 87.8847 4.3503 86.404 4.3503H80.9122V8.82404H86.404ZM86.5581 17.3704C88.2242 17.3704 89.2118 16.4757 89.2118 14.9947C89.2118 13.6989 88.286 12.5882 86.5581 12.5882H80.9122V17.3704H86.5581Z" fill="#03235F"/><path d="M98.8406 4.65884C97.5753 4.65884 96.4955 3.60985 96.4955 2.314C96.4955 1.01816 97.5753 0 98.8406 0C100.136 0 101.185 1.01816 101.185 2.314C101.185 3.60985 100.136 4.65884 98.8406 4.65884ZM100.815 21.1654H96.8968V6.26322H100.815V21.1654Z" fill="#03235F"/><path d="M116.209 21.1654H104.053V18.2343L110.779 9.68795H104.053V6.26318H116.085V9.10172L109.267 17.7407H116.209V21.1654Z" fill="#03235F"/><path d="M98.8719 4.65884C97.6071 4.65884 96.5273 3.60985 96.5273 2.314C96.5273 1.01816 97.6071 0 98.8719 0C100.168 0 101.217 1.01816 101.217 2.314C101.217 3.60985 100.168 4.65884 98.8719 4.65884Z" fill="#C51929"/></g><defs><clipPath id="clip0_12_2101"><rect width="116.209" height="40.042" fill="white"/></clipPath></defs></svg></div><nav class="nav"><button class="tab on" data-t="agents">Агенты</button>
+    <button class="tab" data-t="dash">Дашборд</button>
+    <button class="tab" data-t="mon">Мониторинг</button>
+    <button class="tab" data-t="rec">Рекомендации</button>
+    <button class="tab" data-t="employees">Сотрудники</button>
+    <button class="tab" data-t="channels">Каналы</button></nav><a class="cta" href="https://t.me/Anton_MakeBiz" target="_blank">Обсудить проект</a></div></header>
 <div class="page">
   <header>
-    <div class="logo"><svg width="117" height="41" viewBox="0 0 117 41" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_12_2101)"><path d="M32.2077 24.0427H3.48188C1.55887 24.0427 -3.05176e-05 25.6016 -3.05176e-05 27.5246V36.2294C-3.05176e-05 38.1524 1.55887 39.7113 3.48188 39.7113H32.2077C34.1307 39.7113 35.6896 38.1524 35.6896 36.2294V27.5246C35.6896 25.6016 34.1307 24.0427 32.2077 24.0427Z" fill="#013CA4"/><path d="M20.8571 35.7816H18.932L18.4448 34.4388H15.0461L14.547 35.7816H12.6219L15.6878 27.8553H17.8031L20.8571 35.7816ZM17.9813 32.9533L16.7455 29.5428L15.5096 32.9533H17.9813Z" fill="white"/><path d="M23.2766 35.7816H21.5891V27.8553H23.2766V35.7816Z" fill="white"/><path d="M112.727 24.0427H80.084C78.161 24.0427 76.6021 25.6016 76.6021 27.5246V36.2294C76.6021 38.1524 78.161 39.7113 80.084 39.7113H112.727C114.65 39.7113 116.209 38.1524 116.209 36.2294V27.5246C116.209 25.6016 114.65 24.0427 112.727 24.0427Z" fill="#C51929"/><path d="M88.4257 36.0199C85.9331 36.0199 84.0011 34.275 84.0011 31.72C84.0011 29.165 85.9331 27.42 88.4257 27.42C90.2577 27.42 91.317 28.4171 91.9029 29.4516L90.3826 30.1994C90.0335 29.5264 89.2858 28.9904 88.4257 28.9904C86.9176 28.9904 85.8208 30.1496 85.8208 31.72C85.8208 33.2904 86.9176 34.4495 88.4257 34.4495C89.2858 34.4495 90.0335 33.926 90.3826 33.2405L91.9029 33.9759C91.3048 35.0103 90.2577 36.0199 88.4257 36.0199Z" fill="white"/><path d="M99.1883 35.8703H97.1566L95.524 32.9164H94.2279V35.8703H92.4578V27.5571H96.3466C98.0789 27.5571 99.1383 28.6913 99.1383 30.2368C99.1383 31.7075 98.216 32.4927 97.3185 32.7046L99.1883 35.8703ZM96.0846 31.3585C96.7954 31.3585 97.3311 30.9348 97.3311 30.2368C97.3311 29.5388 96.7954 29.1151 96.0846 29.1151H94.2279V31.3585H96.0846Z" fill="white"/><path d="M108.979 35.8703H107.197V30.0498L104.854 35.8703H104.081L101.738 30.0498V35.8703H99.9683V27.5571H102.448L104.467 32.5799L106.486 27.5571H108.979V35.8703Z" fill="white"/><path d="M71.8144 24.0427H40.4772C38.5542 24.0427 36.9953 25.6016 36.9953 27.5246V36.2294C36.9953 38.1524 38.5542 39.7113 40.4772 39.7113H71.8144C73.7374 39.7113 75.2963 38.1524 75.2963 36.2294V27.5246C75.2963 25.6016 73.7374 24.0427 71.8144 24.0427Z" fill="#013CA4"/><path d="M55.8655 36.5266H50.9229V27.42H55.7153C57.4489 27.42 58.3363 28.5259 58.3363 29.741C58.3363 30.8879 57.6265 31.6525 56.7664 31.83C57.7357 31.9802 58.5139 32.9222 58.5139 34.0691C58.5139 35.4344 57.599 36.5266 55.8655 36.5266ZM55.2918 31.0654C55.9473 31.0654 56.3569 30.6558 56.3569 30.0824C56.3569 29.509 55.9473 29.0857 55.2918 29.0857H52.8615V31.0654H55.2918ZM55.3602 34.8473C56.0975 34.8473 56.5345 34.4514 56.5345 33.796C56.5345 33.2226 56.1249 32.7311 55.3602 32.7311H52.8615V34.8473H55.3602Z" fill="white"/><path d="M61.3687 36.5266H59.4301V27.42H61.3687V36.5266Z" fill="white"/><path d="M22.307 21.1654H17.8949V6.75688L12.0945 21.1654H10.1816L4.38117 6.75688V21.1654H-3.05176e-05V0.586182H6.1398L11.138 13.0201L16.1363 0.586182H22.307V21.1654Z" fill="#03235F"/><path d="M39.1674 21.1653H35.249V19.6227C34.2309 20.826 32.4722 21.5356 30.5284 21.5356C28.1527 21.5356 25.3451 19.9312 25.3451 16.5991C25.3451 13.1126 28.1527 11.7859 30.5284 11.7859C32.5031 11.7859 34.2617 12.4338 35.249 13.6063V11.6008C35.249 10.089 33.9532 9.1017 31.9786 9.1017C30.3742 9.1017 28.8932 9.68792 27.6282 10.8603L26.1473 8.23779C27.9676 6.63342 30.3125 5.89294 32.6573 5.89294C36.0512 5.89294 39.1674 7.2505 39.1674 11.5391V21.1653ZM32.102 18.8822C33.367 18.8822 34.6011 18.4503 35.249 17.5864V15.7352C34.6011 14.8713 33.367 14.4393 32.102 14.4393C30.5593 14.4393 29.2943 15.2415 29.2943 16.6916C29.2943 18.08 30.5593 18.8822 32.102 18.8822Z" fill="#03235F"/><path d="M57.6169 21.1654H52.7108L48.7619 15.4267L46.9722 17.3396V21.1654H43.0539V0.586182H46.9722V12.8967L52.6186 6.26319H57.4314L51.5387 13.0201L57.6169 21.1654Z" fill="#03235F"/><path d="M66.3882 21.5356C61.8526 21.5356 58.4282 18.4811 58.4282 13.6988C58.4282 9.37938 61.6058 5.89294 66.1415 5.89294C70.5844 5.89294 73.608 9.22509 73.608 14.0999V14.9638H62.5316C62.7784 16.8459 64.2904 18.4194 66.82 18.4194C68.0852 18.4194 69.8436 17.8641 70.8003 16.9384L72.5282 19.4684C71.047 20.826 68.7024 21.5356 66.3882 21.5356ZM69.8131 12.3105C69.7204 10.8912 68.7333 9.00912 66.1415 9.00912C63.7041 9.00912 62.6548 10.8295 62.4698 12.3105H69.8131Z" fill="#03235F"/><path d="M87.6997 21.1654H76.5306V0.586182H87.3603C91.2787 0.586182 93.2843 3.08531 93.2843 5.83125C93.2843 8.42293 91.68 10.1507 89.7362 10.5518C91.9268 10.8912 93.6851 13.0201 93.6851 15.6118C93.6851 18.6971 91.6182 21.1654 87.6997 21.1654ZM86.404 8.82404C87.8847 8.82404 88.8105 7.89842 88.8105 6.60259C88.8105 5.30675 87.8847 4.3503 86.404 4.3503H80.9122V8.82404H86.404ZM86.5581 17.3704C88.2242 17.3704 89.2118 16.4757 89.2118 14.9947C89.2118 13.6989 88.286 12.5882 86.5581 12.5882H80.9122V17.3704H86.5581Z" fill="#03235F"/><path d="M98.8406 4.65884C97.5753 4.65884 96.4955 3.60985 96.4955 2.314C96.4955 1.01816 97.5753 0 98.8406 0C100.136 0 101.185 1.01816 101.185 2.314C101.185 3.60985 100.136 4.65884 98.8406 4.65884ZM100.815 21.1654H96.8968V6.26322H100.815V21.1654Z" fill="#03235F"/><path d="M116.209 21.1654H104.053V18.2343L110.779 9.68795H104.053V6.26318H116.085V9.10172L109.267 17.7407H116.209V21.1654Z" fill="#03235F"/><path d="M98.8719 4.65884C97.6071 4.65884 96.5273 3.60985 96.5273 2.314C96.5273 1.01816 97.6071 0 98.8719 0C100.168 0 101.217 1.01816 101.217 2.314C101.217 3.60985 100.168 4.65884 98.8719 4.65884Z" fill="#C51929"/></g><defs><clipPath id="clip0_12_2101"><rect width="116.209" height="40.042" fill="white"/></clipPath></defs></svg></div>
+    
     <h1>Карта системы</h1>
     <div class="sub">живой ассистент собственника · агенты, дашборд, мониторинг, доступы</div>
     <div class="upd">обновлено 3 июля 2026</div>
@@ -197,14 +243,7 @@
     <div class="legend"><span class="i"><span class="dot dg"></span>активный</span><span class="i"><span class="dot da"></span>в отладке</span><span class="i"><span class="dot dd"></span>пассивный, в разработке</span><span class="i">вопрос это описание, стрелка это документ</span></div>
   </header>
 
-  <div class="tabs">
-    <button class="tab on" data-t="agents">Агенты</button>
-    <button class="tab" data-t="dash">Дашборд</button>
-    <button class="tab" data-t="mon">Мониторинг</button>
-    <button class="tab" data-t="rec">Рекомендации</button>
-    <button class="tab" data-t="employees">Сотрудники</button>
-    <button class="tab" data-t="channels">Каналы</button>
-  </div>
+  
 
   <div class="pane on" id="p-agents">
   <div class="bar">
@@ -308,7 +347,16 @@
       <div class="stat"><b>~9 000</b><span>операций агентов</span></div>
       <div class="stat"><b>2.1 млн</b><span>токенов за месяц</span></div>
       <div class="stat"><b>~14 900 ₽</b><span>стоимость за месяц</span></div>
-      <div class="stat s-ok"><b>13</b><span>агентов в работе</span></div>
+    </div>
+    <div class="dgrid">
+      <div class="effsec"><h3>Качество ответов</h3><div class="gaugewrap"><span class="gv">96%</span><span class="gbar green"><i style="width:96%"></i></span></div><div class="subnote" style="margin-top:10px">доля ответов с оценкой 4-5 из 5</div></div>
+      <div class="effsec"><h3>Производительность</h3><div class="gaugewrap"><span class="gv">92%</span><span class="gbar blue"><i style="width:92%"></i></span></div><div class="subnote" style="margin-top:10px">доля задач, доведённых до результата</div></div>
+    </div>
+    <div class="effsec">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><h3 style="margin:0">Загрузка по дням, последние 30 дней</h3><div class="segbtns"><button class="seg on" data-m="req">запросы</button><button class="seg" data-m="tok">токены</button><button class="seg" data-m="load">нагрузка</button></div></div>
+      <div class="days" id="days"></div>
+      <div class="dayx" id="dayx"></div>
+      <div class="subnote" style="margin-top:10px">переключай параметр кнопками, наведи на столбец для даты и значения</div>
     </div>
   <div class="subhead" style="margin-top:0">Нагрузка и метрики по агентам</div>
   <div class="subnote">сколько обращений, основной тип задач, как отрабатывает. Цифры условные, подставим реальные из журналов</div>
@@ -343,6 +391,7 @@
     <tr><td class="emp">Личный</td><td>380</td><td>самочувствие, психология, английский</td><td>«как я спал», «разбери тревогу», «дай урок»</td></tr>
     <tr><td class="emp">Данные</td><td>160</td><td>аналитический отчёт</td><td>«собери отчёт по рынку за неделю»</td></tr>
   </tbody></table></div>
+    <div class="dgrid">
     <div class="effsec">
       <h3>Нагрузка по агентам, операций</h3>
       <div class="brow"><span class="bn">Радар</span><span class="btrack"><i style="width:100%"></i></span><span class="bv">5 200</span></div>
@@ -385,6 +434,7 @@
       <div class="brow"><span class="bn">Урок английского</span><span class="btrack"><i style="width:2.7%"></i></span><span class="bv">140</span></div>
       <div class="brow"><span class="bn">Работа с документом</span><span class="btrack"><i style="width:1.6%"></i></span><span class="bv">85</span></div>
     </div>
+    </div>
     <div class="dgrid">
       <div class="effsec">
         <h3>Результат задач</h3>
@@ -404,81 +454,97 @@
 
   <div class="pane" id="p-mon">
     <div class="note">Рабочий монитор: здоровье системы, ошибки, свежесть данных. Это для тебя, не для показа клиентам</div>
-    <div class="subhead" style="margin-top:14px">Здоровье интеграций</div>
-    <div class="effsec">
-      <div class="hrow"><span class="dot dg"></span><span class="hn">Bitrix24</span><span class="ht">пинг 2 мин назад</span><span class="stbadge st-ok">онлайн</span></div>
-      <div class="hrow"><span class="dot dg"></span><span class="hn">T-Bank Бизнес</span><span class="ht">пинг 5 мин назад</span><span class="stbadge st-ok">онлайн</span></div>
-      <div class="hrow"><span class="dot da"></span><span class="hn">Google Sheets</span><span class="ht">пинг 40 мин назад</span><span class="stbadge st-warn">задержка</span></div>
-      <div class="hrow"><span class="dot dg"></span><span class="hn">Telegram</span><span class="ht">пинг 1 мин назад</span><span class="stbadge st-ok">онлайн</span></div>
-    </div>
-    <div class="subhead">Расписания, кроны</div>
-    <div class="effsec">
-      <div class="hrow"><span class="dot dg"></span><span class="hn">Радар · 09:00</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
-      <div class="hrow"><span class="dot dg"></span><span class="hn">Аналитик · 10:30</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
-      <div class="hrow"><span class="dot dg"></span><span class="hn">Аудитор · 06:00</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
-      <div class="hrow"><span class="dot da"></span><span class="hn">Финансист · ежечасно</span><span class="ht">пропуск в 14:00</span><span class="stbadge st-warn">1 пропуск</span></div>
-      <div class="hrow"><span class="dot dg"></span><span class="hn">Связной · 12:00 и 18:00</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
+    <div class="dgrid">
+      <div class="effsec"><h3>Здоровье интеграций</h3>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">Bitrix24</span><span class="ht">пинг 2 мин назад</span><span class="stbadge st-ok">онлайн</span></div>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">T-Bank Бизнес</span><span class="ht">пинг 5 мин назад</span><span class="stbadge st-ok">онлайн</span></div>
+        <div class="hrow"><span class="dot da"></span><span class="hn">Google Sheets</span><span class="ht">пинг 40 мин назад</span><span class="stbadge st-warn">задержка</span></div>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">Telegram</span><span class="ht">пинг 1 мин назад</span><span class="stbadge st-ok">онлайн</span></div>
+      </div>
+      <div class="effsec"><h3>Расписания, кроны</h3>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">Радар · 09:00</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">Аналитик · 10:30</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">Аудитор · 06:00</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
+        <div class="hrow"><span class="dot da"></span><span class="hn">Финансист · ежечасно</span><span class="ht">пропуск в 14:00</span><span class="stbadge st-warn">1 пропуск</span></div>
+        <div class="hrow"><span class="dot dg"></span><span class="hn">Связной · 12:00 и 18:00</span><span class="ht">сегодня отработал</span><span class="stbadge st-ok">ок</span></div>
+      </div>
     </div>
     <div class="subhead">Последние ошибки</div>
-    <div class="scroll"><table class="acctbl" style="min-width:600px"><thead><tr><th>Время</th><th>Агент</th><th>Тип</th><th>Сообщение</th></tr></thead><tbody>
-      <tr><td>02.07 14:02</td><td>Финансист</td><td><span class="stbadge st-warn">таймаут</span></td><td>T-Bank не ответил за 30с, повтор успешен</td></tr>
-      <tr><td>01.07 09:14</td><td>Радар</td><td><span class="stbadge st-warn">парсинг</span></td><td>источник вернул пустой ответ, пропущен</td></tr>
-      <tr><td>30.06 18:40</td><td>Связной</td><td><span class="stbadge st-bad">доступ</span></td><td>нет прав к архиву чата, задача остановлена</td></tr>
-      <tr><td>29.06 10:31</td><td>Аналитик</td><td><span class="stbadge st-warn">данные</span></td><td>мало новостей за день, отчёт короткий</td></tr>
+    <div class="subnote">полный лог сбоев и предупреждений по всем агентам</div>
+    <div class="scroll"><table class="acctbl" style="min-width:700px"><thead><tr><th>Время</th><th>Агент</th><th>Тип</th><th>Сообщение</th><th>Итог</th></tr></thead><tbody>
+      <tr><td>02.07 14:02</td><td>Финансист</td><td><span class="stbadge st-warn">таймаут</span></td><td>T-Bank не ответил за 30с</td><td><span class="stbadge st-ok">повтор удался</span></td></tr>
+      <tr><td>01.07 09:14</td><td>Радар</td><td><span class="stbadge st-warn">парсинг</span></td><td>источник вернул пустой ответ</td><td><span class="stbadge st-ok">пропущен</span></td></tr>
+      <tr><td>30.06 18:40</td><td>Связной</td><td><span class="stbadge st-bad">доступ</span></td><td>нет прав к архиву чата</td><td><span class="stbadge st-bad">остановлено</span></td></tr>
+      <tr><td>29.06 10:31</td><td>Аналитик</td><td><span class="stbadge st-warn">данные</span></td><td>мало новостей за день</td><td><span class="stbadge st-ok">отчёт короче</span></td></tr>
+      <tr><td>28.06 12:07</td><td>Диспетчер</td><td><span class="stbadge st-bad">границы</span></td><td>попытка выпустить документ, не своя зона</td><td><span class="stbadge st-ok">заблокировано</span></td></tr>
     </tbody></table></div>
-    <div class="subhead">Нарушения границ</div>
-    <div class="subnote">агенты пытались выйти за свою зону, все попытки заблокированы</div>
-    <div class="effsec">
-      <div class="hrow"><span class="hn">Психолог → бизнес-данные</span><span class="stbadge st-ok">0 за месяц</span></div>
-      <div class="hrow"><span class="hn">Связной → отдать сырые переписки</span><span class="stbadge st-ok">0 за месяц</span></div>
-      <div class="hrow"><span class="hn">Диспетчер → выпуск документа</span><span class="stbadge st-warn">1, заблокировано</span></div>
+    <div class="dgrid">
+      <div class="effsec"><h3>Ошибки не своей работы</h3><div class="subnote" style="margin-top:-2px;margin-bottom:8px">агент полез за свою зону, всё заблокировано</div>
+        <div class="hrow"><span class="hn">Диспетчер → выпуск документа</span><span class="stbadge st-warn">1</span></div>
+        <div class="hrow"><span class="hn">Психолог → бизнес-данные</span><span class="stbadge st-ok">0</span></div>
+        <div class="hrow"><span class="hn">Связной → отдать переписки</span><span class="stbadge st-ok">0</span></div>
+        <div class="hrow"><span class="hn">Финансист → платёж в банке</span><span class="stbadge st-ok">0</span></div>
+      </div>
+      <div class="effsec"><h3>Ошибки по агентам</h3><div class="subnote" style="margin-top:-2px;margin-bottom:8px">у кого сколько сбоев за месяц</div>
+        <div class="scroll"><table class="acctbl" style="min-width:0"><thead><tr><th>Агент</th><th>Ошибок</th><th>Основной тип</th></tr></thead><tbody>
+          <tr><td>Финансист</td><td>8</td><td>таймаут T-Bank</td></tr>
+          <tr><td>Радар</td><td>6</td><td>пустой источник</td></tr>
+          <tr><td>Связной</td><td>5</td><td>доступ к архиву</td></tr>
+          <tr><td>Диспетчер</td><td>3</td><td>границы</td></tr>
+          <tr><td>Аналитик</td><td>2</td><td>мало данных</td></tr>
+        </tbody></table></div>
+      </div>
     </div>
     <div class="subhead">Точность маршрутизации Акса</div>
     <div class="stats"><div class="stat s-ok"><b>97%</b><span>верных маршрутов</span></div><div class="stat"><b>3%</b><span>развернул Контролёр</span></div><div class="stat"><b>1.2 с</b><span>время распределения</span></div></div>
-    <div class="subhead">Свежесть данных</div>
-    <div class="scroll"><table class="acctbl" style="min-width:600px"><thead><tr><th>Агент</th><th>База</th><th>Обновлено</th><th>Статус</th></tr></thead><tbody>
-      <tr><td>Радар</td><td>news.sqlite</td><td>сегодня 09:00</td><td><span class="stbadge st-ok">свежо</span></td></tr>
-      <tr><td>Финансист</td><td>finance.sqlite</td><td>сегодня 13:00</td><td><span class="stbadge st-ok">свежо</span></td></tr>
-      <tr><td>Связной</td><td>svyaznoy.sqlite</td><td>сегодня 12:00</td><td><span class="stbadge st-ok">свежо</span></td></tr>
-      <tr><td>Аудитор</td><td>audit.sqlite</td><td>сегодня 06:30</td><td><span class="stbadge st-ok">свежо</span></td></tr>
-      <tr><td>Дашборд</td><td>vitrina_db</td><td>не заполнено</td><td><span class="stbadge st-warn">настройка</span></td></tr>
-    </tbody></table></div>
-    <div class="subhead">Объём баз</div>
-    <div class="scroll"><table class="acctbl" style="min-width:480px"><thead><tr><th>База</th><th>Записей</th><th>Рост за месяц</th></tr></thead><tbody>
-      <tr><td>news.sqlite</td><td>5 200</td><td>+1 400</td></tr>
-      <tr><td>svyaznoy.sqlite</td><td>721</td><td>+65</td></tr>
-      <tr><td>finance.sqlite</td><td>1 240</td><td>+320</td></tr>
-      <tr><td>audit.sqlite</td><td>900</td><td>+900</td></tr>
-    </tbody></table></div>
+    <div class="dgrid">
+      <div class="effsec"><h3>Свежесть данных</h3>
+        <div class="scroll"><table class="acctbl" style="min-width:0"><thead><tr><th>Агент</th><th>База</th><th>Обновлено</th></tr></thead><tbody>
+          <tr><td>Радар</td><td>news.sqlite</td><td><span class="stbadge st-ok">09:00</span></td></tr>
+          <tr><td>Финансист</td><td>finance.sqlite</td><td><span class="stbadge st-ok">13:00</span></td></tr>
+          <tr><td>Связной</td><td>svyaznoy.sqlite</td><td><span class="stbadge st-ok">12:00</span></td></tr>
+          <tr><td>Аудитор</td><td>audit.sqlite</td><td><span class="stbadge st-ok">06:30</span></td></tr>
+          <tr><td>Дашборд</td><td>vitrina_db</td><td><span class="stbadge st-warn">пусто</span></td></tr>
+        </tbody></table></div>
+      </div>
+      <div class="effsec"><h3>Объём баз</h3>
+        <div class="scroll"><table class="acctbl" style="min-width:0"><thead><tr><th>База</th><th>Записей</th><th>Рост/мес</th></tr></thead><tbody>
+          <tr><td>news.sqlite</td><td>5 200</td><td>+1 400</td></tr>
+          <tr><td>svyaznoy.sqlite</td><td>721</td><td>+65</td></tr>
+          <tr><td>finance.sqlite</td><td>1 240</td><td>+320</td></tr>
+          <tr><td>audit.sqlite</td><td>900</td><td>+900</td></tr>
+        </tbody></table></div>
+      </div>
+    </div>
     <div class="subhead">Скорость ответа по агентам</div>
-    <div class="scroll"><table class="acctbl" style="min-width:480px"><thead><tr><th>Агент</th><th>Медиана</th><th>95 перцентиль</th></tr></thead><tbody>
-      <tr><td>Диспетчер</td><td>3.2 с</td><td>8 с</td></tr>
-      <tr><td>Юрист</td><td>6 с</td><td>15 с</td></tr>
-      <tr><td>Финансист</td><td>4 с</td><td>12 с</td></tr>
-      <tr><td>Аналитик</td><td>25 с</td><td>70 с</td></tr>
-      <tr><td>Радар</td><td>40 с</td><td>90 с</td></tr>
+    <div class="scroll"><table class="acctbl" style="min-width:480px"><thead><tr><th>Агент</th><th>Медиана</th><th>95 перцентиль</th><th>Оценка</th></tr></thead><tbody>
+      <tr><td>Диспетчер</td><td>3.2 с</td><td>8 с</td><td><span class="stbadge st-ok">быстро</span></td></tr>
+      <tr><td>Юрист</td><td>6 с</td><td>15 с</td><td><span class="stbadge st-ok">норма</span></td></tr>
+      <tr><td>Финансист</td><td>4 с</td><td>12 с</td><td><span class="stbadge st-ok">норма</span></td></tr>
+      <tr><td>Аналитик</td><td>25 с</td><td>70 с</td><td><span class="stbadge st-warn">тяжёлый</span></td></tr>
+      <tr><td>Радар</td><td>40 с</td><td>90 с</td><td><span class="stbadge st-warn">тяжёлый</span></td></tr>
     </tbody></table></div>
   </div>
 
   <div class="pane" id="p-rec">
-    <div class="note">Рекомендации агента Советник: что улучшить в системе. Обновляются раз в неделю по понедельникам</div>
+    <div class="note">Рекомендации агента Советник: что улучшить в системе и как это сделать. Обновляются раз в неделю по понедельникам</div>
     <div class="subhead" style="margin-top:14px">По системе</div>
-    <div class="rec"><span class="pr pr-hi">важно</span><div><div class="rt">Подключить Дашборд к реальным данным</div><div class="rm">Дашборд в отладке, витрина пока на условных цифрах. Первым закрыть сбор в vitrina_db, это оживит все графики</div></div></div>
-    <div class="rec"><span class="pr pr-hi">важно</span><div><div class="rt">Починить пропуски крона Финансиста</div><div class="rm">За месяц 1 пропуск в 14:00 из-за таймаута T-Bank. Добавить повтор, чтобы не терять час данных</div></div></div>
-    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Ускорить Аналитика</div><div class="rm">95 перцентиль 70с, отчёты тяжёлые. Разбить разбор на части или кэшировать источники Радара</div></div></div>
-    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Включить Контролёра на полную</div><div class="rm">Готовность 55%. Полный запуск снизит долю неверных маршрутов Акса ниже 2%</div></div></div>
-    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Подключить Adesk к Финансисту</div><div class="rm">Сейчас только T-Bank на чтение. Adesk даст полную картину движения денег и P&L</div></div></div>
-    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Разделить чат аудита и рабочий</div><div class="rm">Сводки Аудитора и Контролёра лучше держать в отдельном канале, чтобы не смешивать с задачами</div></div></div>
-    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Взять в работу агента Сделки</div><div class="rm">Задачи ведёт Диспетчер, но воронка продаж не автоматизирована. Потенциал ~5 ч/нед</div></div></div>
-    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Добавить второго Акса для бытовых вопросов</div><div class="rm">Быстрый лёгкий бот под мелкие запросы разгрузит основного и удешевит частые обращения</div></div></div>
-    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Запустить семейный контур</div><div class="rm">4 агента в плане: репетитор, секции, дневник, здоровье семьи. Расширит систему за пределы бизнеса</div></div></div>
+    <div class="rec"><span class="pr pr-hi">важно</span><div><div class="rt">Подключить Дашборд к реальным данным</div><div class="rm">Сейчас витрина крутится на условных цифрах, показывать это клиенту рискованно. Нужно закрыть сбор в vitrina_db: Аудитор пишет снапшот раз в сутки, карта читает его. Это первый шаг, он оживит все графики разом. Оценка: 2-3 дня, разблокирует весь дашборд</div></div></div>
+    <div class="rec"><span class="pr pr-hi">важно</span><div><div class="rt">Починить пропуски крона Финансиста</div><div class="rm">Ежечасный сбор из T-Bank иногда падает по таймауту, за месяц потеряли час данных в 14:00. Добавить автоповтор через 30 секунд и алерт, если два запуска подряд не прошли. Тогда финансовая картина всегда полная</div></div></div>
+    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Ускорить Аналитика</div><div class="rm">Тяжёлые отчёты уходят за 70 секунд на пике и тормозят утреннюю сводку. Разбить разбор на части и кэшировать новости Радара, чтобы не перечитывать одно и то же. Цель: 95 перцентиль ниже 40 секунд</div></div></div>
+    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Включить Контролёра на полную</div><div class="rm">Готовность 55%, работает вполсилы. Полный запуск начнёт разворачивать неверные маршруты Акса сам и уронит долю ошибок ниже 2%. Нужно дописать хук перед ответом и прогнать на тестовых сценариях</div></div></div>
+    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Подключить Adesk к Финансисту</div><div class="rm">Сейчас только T-Bank и только на чтение остатков. Adesk даст полную картину: движение денег, P&L, кассовые разрывы. Это превратит Финансиста из наблюдателя в полноценную финаналитику</div></div></div>
+    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Разделить чат аудита и рабочий</div><div class="rm">Сводки Аудитора и Контролёра сейчас мешаются с рабочими задачами. Отдельный канал под мониторинг сделает ленту чище, а тебе проще ловить сбои и не отвлекаться</div></div></div>
+    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Взять в работу агента Сделки</div><div class="rm">Задачи ведёт Диспетчер, но воронка продаж живёт вручную. Сделки будут двигать стадии, показывать где деньги застряли и что дожать. Потенциал ~5 ч/нед и меньше потерянных сделок</div></div></div>
+    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Второй Акс для бытовых вопросов</div><div class="rm">Мелкие частые запросы гонять через основного Акса дорого по токенам. Лёгкий быстрый бот на простой модели снимет эту нагрузку и удешевит рутину</div></div></div>
+    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Запустить семейный контур</div><div class="rm">В плане 4 агента: репетитор, секции, семейный дневник, здоровье семьи. Это расширит систему за пределы бизнеса и закроет личные задачи семьи в одном месте</div></div></div>
     <div class="subhead">По агентам</div>
-    <div class="rec"><span class="pr pr-md">Связной</span><div><div class="rt">Дозаполнить карточки</div><div class="rm">У 12% контактов пустые поля повода касания, стоит прогнать доуточнение</div></div></div>
-    <div class="rec"><span class="pr pr-md">Финансист</span><div><div class="rt">Стабилизировать крон</div><div class="rm">Ежечасный сбор иногда падает по таймауту T-Bank, добавить повтор и алерт при двух пропусках подряд</div></div></div>
-    <div class="rec"><span class="pr pr-md">Аналитик</span><div><div class="rt">Ускорить отчёты</div><div class="rm">95 перцентиль 70с. Кэшировать разбор Радара и резать длинные отчёты на части</div></div></div>
-    <div class="rec"><span class="pr pr-lo">Тичер</span><div><div class="rt">Поднять уровень</div><div class="rm">300 слов пройдено, пора добавить A2 и фразы посложнее</div></div></div>
-    <div class="rec"><span class="pr pr-lo">Радар</span><div><div class="rt">Расширить источники</div><div class="rm">Добавить 3-4 арабоязычных источника под рынок ОАЭ</div></div></div>
-    <div class="rec"><span class="pr pr-lo">Юрист</span><div><div class="rt">Новые шаблоны</div><div class="rm">Добавить 2-3 шаблона под самые частые типы документов, чтобы реже собирать вручную</div></div></div>
+    <div class="rec"><span class="pr pr-md">Связной</span><div><div class="rt">Дозаполнить карточки</div><div class="rm">У 12% контактов пустые поля повода касания, из-за этого Ментор видит неполную картину. Прогнать разовое доуточнение по архиву и включить автозаполнение при новых контактах</div></div></div>
+    <div class="rec"><span class="pr pr-md">Финансист</span><div><div class="rt">Стабилизировать крон</div><div class="rm">Ежечасный сбор иногда падает по таймауту T-Bank. Добавить повтор и алерт при двух пропусках подряд, чтобы не терять данные и узнавать о проблеме сразу</div></div></div>
+    <div class="rec"><span class="pr pr-md">Аналитик</span><div><div class="rt">Ускорить отчёты</div><div class="rm">95 перцентиль 70 секунд. Кэшировать разбор Радара и резать длинные отчёты на части, чтобы утренняя сводка приходила быстрее</div></div></div>
+    <div class="rec"><span class="pr pr-lo">Тичер</span><div><div class="rt">Поднять уровень</div><div class="rm">300 слов пройдено, база закрыта. Пора добавить уровень A2, фразы посложнее и разговорные ситуации, иначе прогресс встанет</div></div></div>
+    <div class="rec"><span class="pr pr-lo">Радар</span><div><div class="rt">Расширить источники</div><div class="rm">Сейчас в основном русско- и англоязычные источники. Добавить 3-4 арабоязычных под рынок ОАЭ, чтобы не пропускать локальные движения</div></div></div>
+    <div class="rec"><span class="pr pr-lo">Юрист</span><div><div class="rt">Новые шаблоны</div><div class="rm">Часть документов всё ещё собирается вручную. Добавить 2-3 шаблона под самые частые типы, и Юрист закроет их сам за минуты</div></div></div>
   </div>
 
   <div class="pane" id="p-employees">
@@ -503,9 +569,9 @@
     <div class="subhead" style="margin-top:0">Пользователи Telegram</div>
     <div class="subnote">люди с доступом к боту системы, имена уточняются, семейный контур добавит новых</div>
     <div class="lgrid">
-      <div class="lcard"><div class="t"><span class="dot dg"></span>Антон Чернобаев</div><div class="m">владелец, полный доступ ко всей системе</div><div class="id">280369346</div></div>
-      <div class="lcard"><div class="t"><span class="dot da"></span>Пользователь</div><div class="m">в allowlist, доступ уточняется</div><div class="id">5052001144</div></div>
-      <div class="lcard"><div class="t"><span class="dot da"></span>Пользователь</div><div class="m">в allowlist, доступ уточняется</div><div class="id">1369928585</div></div>
+      <div class="lcard"><div class="t"><span class="dot dg"></span>Антон Чернобаев</div><div class="m">владелец, полный доступ ко всей системе</div><div class="id">280369346</div><a class="tglink" href="https://t.me/Anton_MakeBiz" target="_blank">открыть в Telegram &#8594;</a></div>
+      <div class="lcard"><div class="t"><span class="dot da"></span>Пользователь</div><div class="m">в allowlist, доступ уточняется</div><div class="id">5052001144</div><a class="tglink" href="tg://user?id=5052001144">открыть в Telegram &#8594;</a></div>
+      <div class="lcard"><div class="t"><span class="dot da"></span>Пользователь</div><div class="m">в allowlist, доступ уточняется</div><div class="id">1369928585</div><a class="tglink" href="tg://user?id=1369928585">открыть в Telegram &#8594;</a></div>
     </div>
     <div class="subhead">Группы</div>
     <div class="subnote">чаты системы, часть заведена под отдельных агентов</div>
@@ -515,9 +581,9 @@
       <div class="lcard"><div class="t">Аудит</div><div class="m">сводки Аудитора и события Контролёра</div><div class="id">-1004441008201</div></div>
     </div>
     <div class="subhead">Боты</div>
-    <div class="subnote">точки входа в систему</div>
+    <div class="subnote">точки входа в систему. Кинь @username ботов, поставлю прямые ссылки</div>
     <div class="lgrid">
-      <div class="lcard"><div class="t"><span class="dot dg"></span>Акс</div><div class="m">основной бот, единый вход в систему, голос и текст</div></div>
+      <div class="lcard"><div class="t"><span class="dot dg"></span>Акс</div><div class="m">основной бот, единый вход в систему, голос и текст</div><a class="tglink" href="https://t.me/" target="_blank">открыть бота &#8594;</a></div>
       <div class="lcard"><div class="t"><span class="dot dd"></span>Второй Акс</div><div class="m">быстрый чат для мелких бытовых вопросов, в планах</div></div>
     </div>
   </div>
@@ -579,6 +645,14 @@
   if(apick){apick.addEventListener('change',function(){var a=AG[apick.value];if(!a){apanel.classList.remove('on');apanel.innerHTML='';return;}
     apanel.innerHTML='<div class="akpis"><div class="akpi"><b>'+a.req+'</b><span>обращений</span></div><div class="akpi"><b>'+(a.succ?a.succ+'%':'—')+'</b><span>успешно</span></div><div class="akpi"><b>'+a.tok+'</b><span>токенов/мес</span></div><div class="akpi"><b>'+a.sec+'</b><span>ответ</span></div><div class="akpi"><b>'+a.err+'</b><span>ошибок</span></div></div><div class="arow"><b>Роль:</b> '+a.r+'</div><div class="arow"><b>Типы задач:</b> '+a.ty+'</div><div class="arow"><b>Примеры:</b> '+a.ex+'</div><div class="arow"><b>Связи:</b> '+a.con+'</div><div class="arec"><b>Рекомендация Советника:</b> '+a.rec+'</div>';
     apanel.classList.add('on');});}
+  (function(){var days=document.getElementById('days'),dayx=document.getElementById('dayx');if(!days)return;
+    var N=30,data={req:[],tok:[],load:[]};
+    for(var i=0;i<N;i++){var base=60+i*4;var wd=new Date(2026,5,i+1).getDay();var w=(wd===0||wd===6)?0.6:1;var r=Math.round(base*w*(0.7+Math.random()*0.6));data.req.push(r);data.tok.push(Math.round(r*(600+Math.random()*300)));data.load.push(Math.round(r*(0.8+Math.random()*0.5)));}
+    function draw(m){var arr=data[m],max=Math.max.apply(null,arr),h='';for(var i=0;i<N;i++){var pct=Math.max(2,Math.round(arr[i]/max*100)),lbl=(m==='tok')?(arr[i]/1000).toFixed(1)+'к':arr[i];h+='<div class="day2" style="height:'+pct+'%" title="'+(i+1)+' июля: '+lbl+'"></div>';}days.innerHTML=h;
+      var xh='';for(var i=0;i<N;i++){xh+='<span style="flex:1;text-align:center">'+((i%5===0||i===N-1)?(i+1):'')+'</span>';}dayx.innerHTML=xh;}
+    draw('req');
+    document.querySelectorAll('.seg').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.seg').forEach(function(x){x.classList.remove('on')});b.classList.add('on');draw(b.dataset.m);});});
+  })();
 </script>
 </body>
 </html>
