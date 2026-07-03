@@ -207,39 +207,6 @@
   </div>
 
   <div class="pane on" id="p-agents">
-  <div class="subhead" style="margin-top:0">Нагрузка и метрики по агентам</div>
-  <div class="subnote">сколько обращений, основной тип задач, как отрабатывает. Цифры условные, подставим реальные из журналов</div>
-  <div class="scroll"><table class="acctbl" style="min-width:820px"><thead><tr><th>Агент</th><th>Контур</th><th>Обращений</th><th>Осн. тип задач</th><th>Успех</th><th>Ответ</th><th>Токены/мес</th><th>Ошибок</th></tr></thead><tbody>
-    <tr><td class="emp">Радар</td><td>Медиа</td><td>5 200</td><td>новостной дайджест</td><td><span class="stbadge st-ok">97%</span></td><td>40 с</td><td>320 тыс</td><td>6</td></tr>
-    <tr><td class="emp">Акс</td><td>Ядро</td><td>3 400</td><td>маршрутизация</td><td><span class="stbadge st-ok">98%</span></td><td>1.2 с</td><td>820 тыс</td><td>2</td></tr>
-    <tr><td class="emp">Финансист</td><td>Бизнес</td><td>1 240</td><td>финансовый запрос</td><td><span class="stbadge st-ok">95%</span></td><td>4 с</td><td>210 тыс</td><td>8</td></tr>
-    <tr><td class="emp">Аудитор</td><td>Мониторинг</td><td>900</td><td>мониторинг и аудит</td><td><span class="stbadge st-ok">99%</span></td><td>фон</td><td>110 тыс</td><td>1</td></tr>
-    <tr><td class="emp">Связной</td><td>Бизнес</td><td>721</td><td>контакт и CRM</td><td><span class="stbadge st-ok">96%</span></td><td>8 с</td><td>260 тыс</td><td>5</td></tr>
-    <tr><td class="emp">Диспетчер</td><td>Бизнес</td><td>260</td><td>постановка задачи</td><td><span class="stbadge st-ok">97%</span></td><td>3.2 с</td><td>90 тыс</td><td>3</td></tr>
-    <tr><td class="emp">Пульс</td><td>Личный</td><td>180</td><td>чек-ин самочувствия</td><td><span class="stbadge st-ok">99%</span></td><td>2 с</td><td>40 тыс</td><td>0</td></tr>
-    <tr><td class="emp">Аналитик</td><td>Данные</td><td>160</td><td>аналитический отчёт</td><td><span class="stbadge st-ok">98%</span></td><td>25 с</td><td>300 тыс</td><td>2</td></tr>
-    <tr><td class="emp">Тичер</td><td>Личный</td><td>140</td><td>урок английского</td><td><span class="stbadge st-ok">99%</span></td><td>4 с</td><td>90 тыс</td><td>0</td></tr>
-    <tr><td class="emp">Юрист</td><td>Бизнес</td><td>85</td><td>работа с документом</td><td><span class="stbadge st-ok">99%</span></td><td>6 с</td><td>140 тыс</td><td>1</td></tr>
-    <tr><td class="emp">Психолог</td><td>Личный</td><td>60</td><td>психосессия</td><td><span class="stbadge st-ok">100%</span></td><td>5 с</td><td>120 тыс</td><td>0</td></tr>
-    <tr><td class="emp">Ментор</td><td>Бизнес</td><td>42</td><td>стратегический разбор</td><td><span class="stbadge st-ok">100%</span></td><td>30 с</td><td>180 тыс</td><td>0</td></tr>
-    <tr><td class="emp">Советник</td><td>Мониторинг</td><td>24</td><td>рекомендация</td><td><span class="stbadge st-ok">100%</span></td><td>фон</td><td>80 тыс</td><td>0</td></tr>
-    <tr><td class="emp">Дашборд</td><td>Данные</td><td>—</td><td>сбор витрины</td><td><span class="stbadge st-warn">настройка</span></td><td>настройка</td><td>—</td><td>—</td></tr>
-    <tr><td class="emp">Контролёр</td><td>Мониторинг</td><td>—</td><td>проверка маршрута</td><td><span class="stbadge st-warn">настройка</span></td><td>настройка</td><td>—</td><td>—</td></tr>
-  </tbody></table></div>
-  <div class="agentpick">
-    <div class="apick-top"><b>Аналитика по агенту</b><select id="apick"><option value="">выбрать агента</option><option value="aks">Акс</option><option value="mentor">Ментор</option><option value="dispatcher">Диспетчер</option><option value="lawyer">Юрист</option><option value="svyaznoy">Связной</option><option value="finance">Финансист</option><option value="puls">Пульс</option><option value="psy">Психолог</option><option value="teacher">Тичер</option><option value="radar">Радар</option><option value="analyst">Аналитик</option><option value="auditor">Аудитор</option><option value="advisor">Советник</option><option value="dashboard">Дашборд</option><option value="controller">Контролёр</option></select><span class="subnote" style="margin:0">выбери агента и увидишь его статистику, нагрузку и рекомендацию</span></div>
-    <div class="apanel" id="apanel"></div>
-  </div>
-  <div class="subhead">Запросы и задачи по контурам</div>
-  <div class="subnote">по каким контурам сколько обращений, какие типы задач и примеры</div>
-  <div class="scroll"><table class="acctbl" style="min-width:740px"><thead><tr><th>Контур</th><th>Обращений</th><th>Основные типы задач</th><th>Примеры задач</th></tr></thead><tbody>
-    <tr><td class="emp">Ядро</td><td>3 400</td><td>маршрутизация, справка</td><td>«кто закрывает этот счёт», «поставь задачу Диме»</td></tr>
-    <tr><td class="emp">Бизнес</td><td>2 348</td><td>задачи, документы, финансы, CRM</td><td>«сделай счёт на 50к», «что по контакту Иванов»</td></tr>
-    <tr><td class="emp">Медиа и контент</td><td>5 200</td><td>новостной дайджест</td><td>«что нового в AI сегодня»</td></tr>
-    <tr><td class="emp">Мониторинг</td><td>924</td><td>аудит, рекомендации</td><td>«что со здоровьем системы», «что улучшить»</td></tr>
-    <tr><td class="emp">Личный</td><td>380</td><td>самочувствие, психология, английский</td><td>«как я спал», «разбери тревогу», «дай урок»</td></tr>
-    <tr><td class="emp">Данные</td><td>160</td><td>аналитический отчёт</td><td>«собери отчёт по рынку за неделю»</td></tr>
-  </tbody></table></div>
   <div class="bar">
     <div class="fg"><label>контур</label><select id="f-contour"><option value="all">все контуры</option><option value="yadro">ядро</option><option value="biznes">бизнес</option><option value="lichniy">личный</option><option value="semya">семейный</option><option value="media">медиа и контент</option><option value="dannie">данные и аналитика</option><option value="monitoring">мониторинг</option></select></div>
     <div class="fg"><label>база данных</label><select id="f-db"><option value="all">любая</option><option value="sqlite">SQLite</option><option value="postgres">PostgreSQL</option><option value="sheets">Google Sheets</option><option value="none">без базы</option></select></div>
@@ -343,6 +310,39 @@
       <div class="stat"><b>~14 900 ₽</b><span>стоимость за месяц</span></div>
       <div class="stat s-ok"><b>13</b><span>агентов в работе</span></div>
     </div>
+  <div class="subhead" style="margin-top:0">Нагрузка и метрики по агентам</div>
+  <div class="subnote">сколько обращений, основной тип задач, как отрабатывает. Цифры условные, подставим реальные из журналов</div>
+  <div class="scroll"><table class="acctbl" style="min-width:820px"><thead><tr><th>Агент</th><th>Контур</th><th>Обращений</th><th>Осн. тип задач</th><th>Успех</th><th>Ответ</th><th>Токены/мес</th><th>Ошибок</th></tr></thead><tbody>
+    <tr><td class="emp">Радар</td><td>Медиа</td><td>5 200</td><td>новостной дайджест</td><td><span class="stbadge st-ok">97%</span></td><td>40 с</td><td>320 тыс</td><td>6</td></tr>
+    <tr><td class="emp">Акс</td><td>Ядро</td><td>3 400</td><td>маршрутизация</td><td><span class="stbadge st-ok">98%</span></td><td>1.2 с</td><td>820 тыс</td><td>2</td></tr>
+    <tr><td class="emp">Финансист</td><td>Бизнес</td><td>1 240</td><td>финансовый запрос</td><td><span class="stbadge st-ok">95%</span></td><td>4 с</td><td>210 тыс</td><td>8</td></tr>
+    <tr><td class="emp">Аудитор</td><td>Мониторинг</td><td>900</td><td>мониторинг и аудит</td><td><span class="stbadge st-ok">99%</span></td><td>фон</td><td>110 тыс</td><td>1</td></tr>
+    <tr><td class="emp">Связной</td><td>Бизнес</td><td>721</td><td>контакт и CRM</td><td><span class="stbadge st-ok">96%</span></td><td>8 с</td><td>260 тыс</td><td>5</td></tr>
+    <tr><td class="emp">Диспетчер</td><td>Бизнес</td><td>260</td><td>постановка задачи</td><td><span class="stbadge st-ok">97%</span></td><td>3.2 с</td><td>90 тыс</td><td>3</td></tr>
+    <tr><td class="emp">Пульс</td><td>Личный</td><td>180</td><td>чек-ин самочувствия</td><td><span class="stbadge st-ok">99%</span></td><td>2 с</td><td>40 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Аналитик</td><td>Данные</td><td>160</td><td>аналитический отчёт</td><td><span class="stbadge st-ok">98%</span></td><td>25 с</td><td>300 тыс</td><td>2</td></tr>
+    <tr><td class="emp">Тичер</td><td>Личный</td><td>140</td><td>урок английского</td><td><span class="stbadge st-ok">99%</span></td><td>4 с</td><td>90 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Юрист</td><td>Бизнес</td><td>85</td><td>работа с документом</td><td><span class="stbadge st-ok">99%</span></td><td>6 с</td><td>140 тыс</td><td>1</td></tr>
+    <tr><td class="emp">Психолог</td><td>Личный</td><td>60</td><td>психосессия</td><td><span class="stbadge st-ok">100%</span></td><td>5 с</td><td>120 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Ментор</td><td>Бизнес</td><td>42</td><td>стратегический разбор</td><td><span class="stbadge st-ok">100%</span></td><td>30 с</td><td>180 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Советник</td><td>Мониторинг</td><td>24</td><td>рекомендация</td><td><span class="stbadge st-ok">100%</span></td><td>фон</td><td>80 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Дашборд</td><td>Данные</td><td>—</td><td>сбор витрины</td><td><span class="stbadge st-warn">настройка</span></td><td>настройка</td><td>—</td><td>—</td></tr>
+    <tr><td class="emp">Контролёр</td><td>Мониторинг</td><td>—</td><td>проверка маршрута</td><td><span class="stbadge st-warn">настройка</span></td><td>настройка</td><td>—</td><td>—</td></tr>
+  </tbody></table></div>
+  <div class="agentpick">
+    <div class="apick-top"><b>Аналитика по агенту</b><select id="apick"><option value="">выбрать агента</option><option value="aks">Акс</option><option value="mentor">Ментор</option><option value="dispatcher">Диспетчер</option><option value="lawyer">Юрист</option><option value="svyaznoy">Связной</option><option value="finance">Финансист</option><option value="puls">Пульс</option><option value="psy">Психолог</option><option value="teacher">Тичер</option><option value="radar">Радар</option><option value="analyst">Аналитик</option><option value="auditor">Аудитор</option><option value="advisor">Советник</option><option value="dashboard">Дашборд</option><option value="controller">Контролёр</option></select><span class="subnote" style="margin:0">выбери агента и увидишь его статистику, нагрузку и рекомендацию</span></div>
+    <div class="apanel" id="apanel"></div>
+  </div>
+  <div class="subhead">Запросы и задачи по контурам</div>
+  <div class="subnote">по каким контурам сколько обращений, какие типы задач и примеры</div>
+  <div class="scroll"><table class="acctbl" style="min-width:740px"><thead><tr><th>Контур</th><th>Обращений</th><th>Основные типы задач</th><th>Примеры задач</th></tr></thead><tbody>
+    <tr><td class="emp">Ядро</td><td>3 400</td><td>маршрутизация, справка</td><td>«кто закрывает этот счёт», «поставь задачу Диме»</td></tr>
+    <tr><td class="emp">Бизнес</td><td>2 348</td><td>задачи, документы, финансы, CRM</td><td>«сделай счёт на 50к», «что по контакту Иванов»</td></tr>
+    <tr><td class="emp">Медиа и контент</td><td>5 200</td><td>новостной дайджест</td><td>«что нового в AI сегодня»</td></tr>
+    <tr><td class="emp">Мониторинг</td><td>924</td><td>аудит, рекомендации</td><td>«что со здоровьем системы», «что улучшить»</td></tr>
+    <tr><td class="emp">Личный</td><td>380</td><td>самочувствие, психология, английский</td><td>«как я спал», «разбери тревогу», «дай урок»</td></tr>
+    <tr><td class="emp">Данные</td><td>160</td><td>аналитический отчёт</td><td>«собери отчёт по рынку за неделю»</td></tr>
+  </tbody></table></div>
     <div class="effsec">
       <h3>Нагрузка по агентам, операций</h3>
       <div class="brow"><span class="bn">Радар</span><span class="btrack"><i style="width:100%"></i></span><span class="bv">5 200</span></div>
