@@ -9,6 +9,8 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--tp);font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
   .page{max-width:1180px;margin:0 auto;padding:32px 20px 60px}
+  .logo{margin-bottom:12px}
+  .logo svg{height:40px;width:auto;display:block}
   h1{font-size:26px;font-weight:600;margin:0;color:#013CA4}
   .sub{font-size:15px;color:var(--ts);margin-top:2px}
   .upd{font-size:13px;color:var(--tm);margin-top:8px}
@@ -136,7 +138,23 @@
   .subhead{font-size:15px;font-weight:600;margin:22px 0 3px;color:var(--tp)}
   .subnote{font-size:12.5px;color:var(--tm);margin-bottom:6px}
   footer{margin-top:40px;font-size:12.5px;color:var(--tm);border-top:1px solid var(--border);padding-top:16px}
-  @media (max-width:640px){h1{font-size:22px}.page{padding:24px 14px 40px}.brow .bn{width:110px}}
+  @media (max-width:640px){
+    h1{font-size:21px}
+    .page{padding:22px 12px 40px}
+    .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .tab{white-space:nowrap;padding:9px 12px}
+    .stat{min-width:calc(50% - 5px);flex:1 1 calc(50% - 5px);padding:9px 12px}
+    .stat b{font-size:20px}
+    .brow .bn{width:96px;font-size:11.5px} .brow .bv{width:48px}
+    .donutwrap{flex-direction:column;align-items:flex-start;gap:12px}
+    .heat{font-size:9px;gap:2px}
+    .effsec{padding:14px 12px}
+    .metrics{gap:14px}
+    .card{padding:14px 14px 14px 18px}
+    .card.wide{padding:14px 14px 14px 18px} .wside{min-width:0;width:100%}
+    .apick-top{gap:8px} .apick-top select{flex:1 1 100%}
+    .akpi{min-width:calc(33% - 7px);flex:1 1 calc(33% - 7px)}
+  }
 </style>
 </head>
 <body>
@@ -166,8 +184,9 @@
 
 <div class="page">
   <header>
-    <h1>Карта системы MakeBiz</h1>
-    <div class="sub">живой ассистент собственника · агенты, эффективность, доступы</div>
+    <div class="logo"><svg width="117" height="41" viewBox="0 0 117 41" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_12_2101)"><path d="M32.2077 24.0427H3.48188C1.55887 24.0427 -3.05176e-05 25.6016 -3.05176e-05 27.5246V36.2294C-3.05176e-05 38.1524 1.55887 39.7113 3.48188 39.7113H32.2077C34.1307 39.7113 35.6896 38.1524 35.6896 36.2294V27.5246C35.6896 25.6016 34.1307 24.0427 32.2077 24.0427Z" fill="#013CA4"/><path d="M20.8571 35.7816H18.932L18.4448 34.4388H15.0461L14.547 35.7816H12.6219L15.6878 27.8553H17.8031L20.8571 35.7816ZM17.9813 32.9533L16.7455 29.5428L15.5096 32.9533H17.9813Z" fill="white"/><path d="M23.2766 35.7816H21.5891V27.8553H23.2766V35.7816Z" fill="white"/><path d="M112.727 24.0427H80.084C78.161 24.0427 76.6021 25.6016 76.6021 27.5246V36.2294C76.6021 38.1524 78.161 39.7113 80.084 39.7113H112.727C114.65 39.7113 116.209 38.1524 116.209 36.2294V27.5246C116.209 25.6016 114.65 24.0427 112.727 24.0427Z" fill="#C51929"/><path d="M88.4257 36.0199C85.9331 36.0199 84.0011 34.275 84.0011 31.72C84.0011 29.165 85.9331 27.42 88.4257 27.42C90.2577 27.42 91.317 28.4171 91.9029 29.4516L90.3826 30.1994C90.0335 29.5264 89.2858 28.9904 88.4257 28.9904C86.9176 28.9904 85.8208 30.1496 85.8208 31.72C85.8208 33.2904 86.9176 34.4495 88.4257 34.4495C89.2858 34.4495 90.0335 33.926 90.3826 33.2405L91.9029 33.9759C91.3048 35.0103 90.2577 36.0199 88.4257 36.0199Z" fill="white"/><path d="M99.1883 35.8703H97.1566L95.524 32.9164H94.2279V35.8703H92.4578V27.5571H96.3466C98.0789 27.5571 99.1383 28.6913 99.1383 30.2368C99.1383 31.7075 98.216 32.4927 97.3185 32.7046L99.1883 35.8703ZM96.0846 31.3585C96.7954 31.3585 97.3311 30.9348 97.3311 30.2368C97.3311 29.5388 96.7954 29.1151 96.0846 29.1151H94.2279V31.3585H96.0846Z" fill="white"/><path d="M108.979 35.8703H107.197V30.0498L104.854 35.8703H104.081L101.738 30.0498V35.8703H99.9683V27.5571H102.448L104.467 32.5799L106.486 27.5571H108.979V35.8703Z" fill="white"/><path d="M71.8144 24.0427H40.4772C38.5542 24.0427 36.9953 25.6016 36.9953 27.5246V36.2294C36.9953 38.1524 38.5542 39.7113 40.4772 39.7113H71.8144C73.7374 39.7113 75.2963 38.1524 75.2963 36.2294V27.5246C75.2963 25.6016 73.7374 24.0427 71.8144 24.0427Z" fill="#013CA4"/><path d="M55.8655 36.5266H50.9229V27.42H55.7153C57.4489 27.42 58.3363 28.5259 58.3363 29.741C58.3363 30.8879 57.6265 31.6525 56.7664 31.83C57.7357 31.9802 58.5139 32.9222 58.5139 34.0691C58.5139 35.4344 57.599 36.5266 55.8655 36.5266ZM55.2918 31.0654C55.9473 31.0654 56.3569 30.6558 56.3569 30.0824C56.3569 29.509 55.9473 29.0857 55.2918 29.0857H52.8615V31.0654H55.2918ZM55.3602 34.8473C56.0975 34.8473 56.5345 34.4514 56.5345 33.796C56.5345 33.2226 56.1249 32.7311 55.3602 32.7311H52.8615V34.8473H55.3602Z" fill="white"/><path d="M61.3687 36.5266H59.4301V27.42H61.3687V36.5266Z" fill="white"/><path d="M22.307 21.1654H17.8949V6.75688L12.0945 21.1654H10.1816L4.38117 6.75688V21.1654H-3.05176e-05V0.586182H6.1398L11.138 13.0201L16.1363 0.586182H22.307V21.1654Z" fill="#03235F"/><path d="M39.1674 21.1653H35.249V19.6227C34.2309 20.826 32.4722 21.5356 30.5284 21.5356C28.1527 21.5356 25.3451 19.9312 25.3451 16.5991C25.3451 13.1126 28.1527 11.7859 30.5284 11.7859C32.5031 11.7859 34.2617 12.4338 35.249 13.6063V11.6008C35.249 10.089 33.9532 9.1017 31.9786 9.1017C30.3742 9.1017 28.8932 9.68792 27.6282 10.8603L26.1473 8.23779C27.9676 6.63342 30.3125 5.89294 32.6573 5.89294C36.0512 5.89294 39.1674 7.2505 39.1674 11.5391V21.1653ZM32.102 18.8822C33.367 18.8822 34.6011 18.4503 35.249 17.5864V15.7352C34.6011 14.8713 33.367 14.4393 32.102 14.4393C30.5593 14.4393 29.2943 15.2415 29.2943 16.6916C29.2943 18.08 30.5593 18.8822 32.102 18.8822Z" fill="#03235F"/><path d="M57.6169 21.1654H52.7108L48.7619 15.4267L46.9722 17.3396V21.1654H43.0539V0.586182H46.9722V12.8967L52.6186 6.26319H57.4314L51.5387 13.0201L57.6169 21.1654Z" fill="#03235F"/><path d="M66.3882 21.5356C61.8526 21.5356 58.4282 18.4811 58.4282 13.6988C58.4282 9.37938 61.6058 5.89294 66.1415 5.89294C70.5844 5.89294 73.608 9.22509 73.608 14.0999V14.9638H62.5316C62.7784 16.8459 64.2904 18.4194 66.82 18.4194C68.0852 18.4194 69.8436 17.8641 70.8003 16.9384L72.5282 19.4684C71.047 20.826 68.7024 21.5356 66.3882 21.5356ZM69.8131 12.3105C69.7204 10.8912 68.7333 9.00912 66.1415 9.00912C63.7041 9.00912 62.6548 10.8295 62.4698 12.3105H69.8131Z" fill="#03235F"/><path d="M87.6997 21.1654H76.5306V0.586182H87.3603C91.2787 0.586182 93.2843 3.08531 93.2843 5.83125C93.2843 8.42293 91.68 10.1507 89.7362 10.5518C91.9268 10.8912 93.6851 13.0201 93.6851 15.6118C93.6851 18.6971 91.6182 21.1654 87.6997 21.1654ZM86.404 8.82404C87.8847 8.82404 88.8105 7.89842 88.8105 6.60259C88.8105 5.30675 87.8847 4.3503 86.404 4.3503H80.9122V8.82404H86.404ZM86.5581 17.3704C88.2242 17.3704 89.2118 16.4757 89.2118 14.9947C89.2118 13.6989 88.286 12.5882 86.5581 12.5882H80.9122V17.3704H86.5581Z" fill="#03235F"/><path d="M98.8406 4.65884C97.5753 4.65884 96.4955 3.60985 96.4955 2.314C96.4955 1.01816 97.5753 0 98.8406 0C100.136 0 101.185 1.01816 101.185 2.314C101.185 3.60985 100.136 4.65884 98.8406 4.65884ZM100.815 21.1654H96.8968V6.26322H100.815V21.1654Z" fill="#03235F"/><path d="M116.209 21.1654H104.053V18.2343L110.779 9.68795H104.053V6.26318H116.085V9.10172L109.267 17.7407H116.209V21.1654Z" fill="#03235F"/><path d="M98.8719 4.65884C97.6071 4.65884 96.5273 3.60985 96.5273 2.314C96.5273 1.01816 97.6071 0 98.8719 0C100.168 0 101.217 1.01816 101.217 2.314C101.217 3.60985 100.168 4.65884 98.8719 4.65884Z" fill="#C51929"/></g><defs><clipPath id="clip0_12_2101"><rect width="116.209" height="40.042" fill="white"/></clipPath></defs></svg></div>
+    <h1>Карта системы</h1>
+    <div class="sub">живой ассистент собственника · агенты, дашборд, мониторинг, доступы</div>
     <div class="upd">обновлено 3 июля 2026</div>
     <div class="stats">
       <div class="stat"><b>39</b><span>всего агентов</span></div>
@@ -179,19 +198,48 @@
   </header>
 
   <div class="tabs">
-    <button class="tab on" data-t="dash">Дашборд</button>
-    <button class="tab" data-t="agents">Агенты</button>
+    <button class="tab on" data-t="agents">Агенты</button>
+    <button class="tab" data-t="dash">Дашборд</button>
     <button class="tab" data-t="mon">Мониторинг</button>
     <button class="tab" data-t="rec">Рекомендации</button>
     <button class="tab" data-t="employees">Сотрудники</button>
     <button class="tab" data-t="channels">Каналы</button>
   </div>
 
-  <div class="pane" id="p-agents">
+  <div class="pane on" id="p-agents">
+  <div class="subhead" style="margin-top:0">Нагрузка и метрики по агентам</div>
+  <div class="subnote">сколько обращений, основной тип задач, как отрабатывает. Цифры условные, подставим реальные из журналов</div>
+  <div class="scroll"><table class="acctbl" style="min-width:820px"><thead><tr><th>Агент</th><th>Контур</th><th>Обращений</th><th>Осн. тип задач</th><th>Успех</th><th>Ответ</th><th>Токены/мес</th><th>Ошибок</th></tr></thead><tbody>
+    <tr><td class="emp">Радар</td><td>Медиа</td><td>5 200</td><td>новостной дайджест</td><td><span class="stbadge st-ok">97%</span></td><td>40 с</td><td>320 тыс</td><td>6</td></tr>
+    <tr><td class="emp">Акс</td><td>Ядро</td><td>3 400</td><td>маршрутизация</td><td><span class="stbadge st-ok">98%</span></td><td>1.2 с</td><td>820 тыс</td><td>2</td></tr>
+    <tr><td class="emp">Финансист</td><td>Бизнес</td><td>1 240</td><td>финансовый запрос</td><td><span class="stbadge st-ok">95%</span></td><td>4 с</td><td>210 тыс</td><td>8</td></tr>
+    <tr><td class="emp">Аудитор</td><td>Мониторинг</td><td>900</td><td>мониторинг и аудит</td><td><span class="stbadge st-ok">99%</span></td><td>фон</td><td>110 тыс</td><td>1</td></tr>
+    <tr><td class="emp">Связной</td><td>Бизнес</td><td>721</td><td>контакт и CRM</td><td><span class="stbadge st-ok">96%</span></td><td>8 с</td><td>260 тыс</td><td>5</td></tr>
+    <tr><td class="emp">Диспетчер</td><td>Бизнес</td><td>260</td><td>постановка задачи</td><td><span class="stbadge st-ok">97%</span></td><td>3.2 с</td><td>90 тыс</td><td>3</td></tr>
+    <tr><td class="emp">Пульс</td><td>Личный</td><td>180</td><td>чек-ин самочувствия</td><td><span class="stbadge st-ok">99%</span></td><td>2 с</td><td>40 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Аналитик</td><td>Данные</td><td>160</td><td>аналитический отчёт</td><td><span class="stbadge st-ok">98%</span></td><td>25 с</td><td>300 тыс</td><td>2</td></tr>
+    <tr><td class="emp">Тичер</td><td>Личный</td><td>140</td><td>урок английского</td><td><span class="stbadge st-ok">99%</span></td><td>4 с</td><td>90 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Юрист</td><td>Бизнес</td><td>85</td><td>работа с документом</td><td><span class="stbadge st-ok">99%</span></td><td>6 с</td><td>140 тыс</td><td>1</td></tr>
+    <tr><td class="emp">Психолог</td><td>Личный</td><td>60</td><td>психосессия</td><td><span class="stbadge st-ok">100%</span></td><td>5 с</td><td>120 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Ментор</td><td>Бизнес</td><td>42</td><td>стратегический разбор</td><td><span class="stbadge st-ok">100%</span></td><td>30 с</td><td>180 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Советник</td><td>Мониторинг</td><td>24</td><td>рекомендация</td><td><span class="stbadge st-ok">100%</span></td><td>фон</td><td>80 тыс</td><td>0</td></tr>
+    <tr><td class="emp">Дашборд</td><td>Данные</td><td>—</td><td>сбор витрины</td><td><span class="stbadge st-warn">настройка</span></td><td>настройка</td><td>—</td><td>—</td></tr>
+    <tr><td class="emp">Контролёр</td><td>Мониторинг</td><td>—</td><td>проверка маршрута</td><td><span class="stbadge st-warn">настройка</span></td><td>настройка</td><td>—</td><td>—</td></tr>
+  </tbody></table></div>
   <div class="agentpick">
     <div class="apick-top"><b>Аналитика по агенту</b><select id="apick"><option value="">выбрать агента</option><option value="aks">Акс</option><option value="mentor">Ментор</option><option value="dispatcher">Диспетчер</option><option value="lawyer">Юрист</option><option value="svyaznoy">Связной</option><option value="finance">Финансист</option><option value="puls">Пульс</option><option value="psy">Психолог</option><option value="teacher">Тичер</option><option value="radar">Радар</option><option value="analyst">Аналитик</option><option value="auditor">Аудитор</option><option value="advisor">Советник</option><option value="dashboard">Дашборд</option><option value="controller">Контролёр</option></select><span class="subnote" style="margin:0">выбери агента и увидишь его статистику, нагрузку и рекомендацию</span></div>
     <div class="apanel" id="apanel"></div>
   </div>
+  <div class="subhead">Запросы и задачи по контурам</div>
+  <div class="subnote">по каким контурам сколько обращений, какие типы задач и примеры</div>
+  <div class="scroll"><table class="acctbl" style="min-width:740px"><thead><tr><th>Контур</th><th>Обращений</th><th>Основные типы задач</th><th>Примеры задач</th></tr></thead><tbody>
+    <tr><td class="emp">Ядро</td><td>3 400</td><td>маршрутизация, справка</td><td>«кто закрывает этот счёт», «поставь задачу Диме»</td></tr>
+    <tr><td class="emp">Бизнес</td><td>2 348</td><td>задачи, документы, финансы, CRM</td><td>«сделай счёт на 50к», «что по контакту Иванов»</td></tr>
+    <tr><td class="emp">Медиа и контент</td><td>5 200</td><td>новостной дайджест</td><td>«что нового в AI сегодня»</td></tr>
+    <tr><td class="emp">Мониторинг</td><td>924</td><td>аудит, рекомендации</td><td>«что со здоровьем системы», «что улучшить»</td></tr>
+    <tr><td class="emp">Личный</td><td>380</td><td>самочувствие, психология, английский</td><td>«как я спал», «разбери тревогу», «дай урок»</td></tr>
+    <tr><td class="emp">Данные</td><td>160</td><td>аналитический отчёт</td><td>«собери отчёт по рынку за неделю»</td></tr>
+  </tbody></table></div>
   <div class="bar">
     <div class="fg"><label>контур</label><select id="f-contour"><option value="all">все контуры</option><option value="yadro">ядро</option><option value="biznes">бизнес</option><option value="lichniy">личный</option><option value="semya">семейный</option><option value="media">медиа и контент</option><option value="dannie">данные и аналитика</option><option value="monitoring">мониторинг</option></select></div>
     <div class="fg"><label>база данных</label><select id="f-db"><option value="all">любая</option><option value="sqlite">SQLite</option><option value="postgres">PostgreSQL</option><option value="sheets">Google Sheets</option><option value="none">без базы</option></select></div>
@@ -282,7 +330,7 @@
   </div>
   </div>
 
-  <div class="pane on" id="p-dash">
+  <div class="pane" id="p-dash">
     <div class="dashhead">Витрина системы: главные показатели для показа клиентам. Цифры пока условные, подставим реальные из журналов Аудитора и Финансиста</div>
     <div class="stats" style="margin-top:12px">
       <div class="stat"><b>3 400</b><span>запросов всего</span></div>
@@ -419,11 +467,18 @@
     <div class="rec"><span class="pr pr-hi">важно</span><div><div class="rt">Починить пропуски крона Финансиста</div><div class="rm">За месяц 1 пропуск в 14:00 из-за таймаута T-Bank. Добавить повтор, чтобы не терять час данных</div></div></div>
     <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Ускорить Аналитика</div><div class="rm">95 перцентиль 70с, отчёты тяжёлые. Разбить разбор на части или кэшировать источники Радара</div></div></div>
     <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Включить Контролёра на полную</div><div class="rm">Готовность 55%. Полный запуск снизит долю неверных маршрутов Акса ниже 2%</div></div></div>
+    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Подключить Adesk к Финансисту</div><div class="rm">Сейчас только T-Bank на чтение. Adesk даст полную картину движения денег и P&L</div></div></div>
+    <div class="rec"><span class="pr pr-md">средне</span><div><div class="rt">Разделить чат аудита и рабочий</div><div class="rm">Сводки Аудитора и Контролёра лучше держать в отдельном канале, чтобы не смешивать с задачами</div></div></div>
     <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Взять в работу агента Сделки</div><div class="rm">Задачи ведёт Диспетчер, но воронка продаж не автоматизирована. Потенциал ~5 ч/нед</div></div></div>
+    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Добавить второго Акса для бытовых вопросов</div><div class="rm">Быстрый лёгкий бот под мелкие запросы разгрузит основного и удешевит частые обращения</div></div></div>
+    <div class="rec"><span class="pr pr-lo">идея</span><div><div class="rt">Запустить семейный контур</div><div class="rm">4 агента в плане: репетитор, секции, дневник, здоровье семьи. Расширит систему за пределы бизнеса</div></div></div>
     <div class="subhead">По агентам</div>
     <div class="rec"><span class="pr pr-md">Связной</span><div><div class="rt">Дозаполнить карточки</div><div class="rm">У 12% контактов пустые поля повода касания, стоит прогнать доуточнение</div></div></div>
+    <div class="rec"><span class="pr pr-md">Финансист</span><div><div class="rt">Стабилизировать крон</div><div class="rm">Ежечасный сбор иногда падает по таймауту T-Bank, добавить повтор и алерт при двух пропусках подряд</div></div></div>
+    <div class="rec"><span class="pr pr-md">Аналитик</span><div><div class="rt">Ускорить отчёты</div><div class="rm">95 перцентиль 70с. Кэшировать разбор Радара и резать длинные отчёты на части</div></div></div>
     <div class="rec"><span class="pr pr-lo">Тичер</span><div><div class="rt">Поднять уровень</div><div class="rm">300 слов пройдено, пора добавить A2 и фразы посложнее</div></div></div>
     <div class="rec"><span class="pr pr-lo">Радар</span><div><div class="rt">Расширить источники</div><div class="rm">Добавить 3-4 арабоязычных источника под рынок ОАЭ</div></div></div>
+    <div class="rec"><span class="pr pr-lo">Юрист</span><div><div class="rt">Новые шаблоны</div><div class="rm">Добавить 2-3 шаблона под самые частые типы документов, чтобы реже собирать вручную</div></div></div>
   </div>
 
   <div class="pane" id="p-employees">
@@ -500,30 +555,29 @@
   document.querySelectorAll('.qb').forEach(function(q){q.addEventListener('click',function(){q.closest('.card').classList.toggle('open')})});
   var expall=document.getElementById('expall'),op=false;
   expall.addEventListener('click',function(){op=!op;document.querySelectorAll('.card.agent').forEach(function(a){a.classList.toggle('open',op)});expall.textContent=op?'свернуть все':'раскрыть все';});
-  dbh.style.display='none';dbg.style.display='none';
   (function(){var h=document.getElementById('heat');if(!h)return;var days=['пн','вт','ср','чт','пт','сб','вс'];var html='<div class="hl"></div>';for(var c=0;c<12;c++){html+='<div class="hl">'+(c*2)+'</div>';}
     for(var d=0;d<7;d++){html+='<div class="hl">'+days[d]+'</div>';for(var c=0;c<12;c++){var hour=c*2;var base=(hour>=8&&hour<=20)?1:0.12;if(d>=5)base*=0.55;var peak=((hour>=10&&hour<=12)||(hour>=16&&hour<=18))?1.4:1;var v=Math.min(1,base*peak*(0.68+Math.random()*0.5));html+='<div class="hc" style="background:'+(v<0.09?'#eef1f5':'rgba(1,60,164,'+v.toFixed(2)+')')+'"></div>';}}
     h.innerHTML=html;})();
   var AG={
-    aks:{n:'Акс',r:'Единый вход и дирижёр',req:3400,succ:98,tok:'820 тыс',sec:'1.2 с',tt:'маршрутизация, справка',err:2,con:'все агенты',rec:'Ядро стабильно, следить за точностью маршрутов через Контролёра'},
-    mentor:{n:'Ментор',r:'Бизнес-коуч',req:42,succ:100,tok:'180 тыс',sec:'30 с',tt:'стратегический разбор',err:0,con:'Связной',rec:'Разборов мало, можно чаще выносить в них крупные решения'},
-    dispatcher:{n:'Диспетчер',r:'Задачи в Bitrix',req:260,succ:97,tok:'90 тыс',sec:'3.2 с',tt:'постановка задачи',err:3,con:'Акс',rec:'Стабильно, готов принять воронку Сделок сверху'},
-    lawyer:{n:'Юрист',r:'Документы по шаблонам',req:85,succ:99,tok:'140 тыс',sec:'6 с',tt:'работа с документом',err:1,con:'Акс',rec:'Добавить 2-3 новых шаблона под частые запросы'},
-    svyaznoy:{n:'Связной',r:'Карточки контактов',req:721,succ:96,tok:'260 тыс',sec:'8 с',tt:'контакт и CRM',err:5,con:'Ментор',rec:'У 12% контактов пустые поля повода, прогнать доуточнение'},
-    finance:{n:'Финансист',r:'Финансовая аналитика',req:1240,succ:95,tok:'210 тыс',sec:'4 с',tt:'финансовый запрос',err:8,con:'Акс',rec:'Починить повтор при таймауте T-Bank, был 1 пропуск крона'},
-    puls:{n:'Пульс',r:'Чек-ины самочувствия',req:180,succ:99,tok:'40 тыс',sec:'2 с',tt:'чек-ин самочувствия',err:0,con:'Акс',rec:'Работает ровно, данных достаточно для динамики'},
-    psy:{n:'Психолог',r:'Эмоции и состояние',req:60,succ:100,tok:'120 тыс',sec:'5 с',tt:'психосессия',err:0,con:'изолирован',rec:'Изоляция соблюдается, ноль попыток выхода в бизнес'},
-    teacher:{n:'Тичер',r:'Английский',req:140,succ:99,tok:'90 тыс',sec:'4 с',tt:'урок английского',err:0,con:'Акс',rec:'300 слов пройдено, пора поднимать уровень до A2'},
-    radar:{n:'Радар',r:'Сбор AI-новостей',req:5200,succ:97,tok:'320 тыс',sec:'40 с',tt:'новостной дайджест',err:6,con:'Аналитик',rec:'Добавить арабоязычные источники под рынок ОАЭ'},
-    analyst:{n:'Аналитик',r:'Отчёт рынка',req:160,succ:98,tok:'300 тыс',sec:'25 с',tt:'аналитический отчёт',err:2,con:'Радар',rec:'Тяжёлые отчёты, разбить разбор на части для скорости'},
-    auditor:{n:'Аудитор',r:'Наблюдатель системы',req:900,succ:99,tok:'110 тыс',sec:'фон',tt:'мониторинг и аудит',err:1,con:'все агенты',rec:'Расширить сбор: токены и тип задачи, чтобы питать дашборд'},
-    advisor:{n:'Советник',r:'Рекомендации',req:24,succ:100,tok:'80 тыс',sec:'фон',tt:'рекомендация',err:0,con:'читает всё',rec:'Работает еженедельно, можно добавить разбор по каждому агенту'},
-    dashboard:{n:'Дашборд',r:'Витрина данных',req:0,succ:0,tok:'0',sec:'настройка',tt:'сбор витрины',err:0,con:'Финансист, Связной, Радар',rec:'Приоритет номер один: подключить сбор в vitrina_db'},
-    controller:{n:'Контролёр',r:'Проверка маршрутов',req:0,succ:0,tok:'настройка',sec:'настройка',tt:'проверка маршрута',err:0,con:'Акс, Аудитор',rec:'Готовность 55%, довести до полного запуска'}
+    aks:{n:'Акс',r:'Единый вход и дирижёр',req:3400,succ:98,tok:'820 тыс',sec:'1.2 с',err:2,con:'все агенты',ty:'маршрутизация 80%, справка 15%, прочее 5%',ex:'«кто закрывает этот счёт», «поставь задачу Диме»',rec:'Ядро стабильно, следить за точностью маршрутов через Контролёра'},
+    mentor:{n:'Ментор',r:'Бизнес-коуч',req:42,succ:100,tok:'180 тыс',sec:'30 с',err:0,con:'Связной',ty:'стратегический разбор 100%',ex:'«разбери запуск OpenClaw», «стоит ли брать проект»',rec:'Разборов мало, можно чаще выносить в них крупные решения'},
+    dispatcher:{n:'Диспетчер',r:'Задачи в Bitrix',req:260,succ:97,tok:'90 тыс',sec:'3.2 с',err:3,con:'Акс',ty:'постановка задачи 85%, статусы 15%',ex:'«поставь задачу на среду», «что по задаче X»',rec:'Стабильно, готов принять воронку Сделок сверху'},
+    lawyer:{n:'Юрист',r:'Документы по шаблонам',req:85,succ:99,tok:'140 тыс',sec:'6 с',err:1,con:'Акс',ty:'договор 45%, счёт 35%, акт 20%',ex:'«сделай счёт на 50к», «договор с ООО Ромашка»',rec:'Добавить 2-3 новых шаблона под частые запросы'},
+    svyaznoy:{n:'Связной',r:'Карточки контактов',req:721,succ:96,tok:'260 тыс',sec:'8 с',err:5,con:'Ментор',ty:'карточка контакта 70%, повод касания 30%',ex:'«что по контакту Иванов», «кого давно не касался»',rec:'У 12% контактов пустые поля повода, прогнать доуточнение'},
+    finance:{n:'Финансист',r:'Финансовая аналитика',req:1240,succ:95,tok:'210 тыс',sec:'4 с',err:8,con:'Акс',ty:'финансовый запрос 60%, сводка 30%, аналитика 10%',ex:'«сколько на счёте», «что пришло за неделю»',rec:'Починить повтор при таймауте T-Bank, был 1 пропуск крона'},
+    puls:{n:'Пульс',r:'Чек-ины самочувствия',req:180,succ:99,tok:'40 тыс',sec:'2 с',err:0,con:'Акс',ty:'чек-ин 100%',ex:'«как сон», «уровень энергии сегодня»',rec:'Работает ровно, данных достаточно для динамики'},
+    psy:{n:'Психолог',r:'Эмоции и состояние',req:60,succ:100,tok:'120 тыс',sec:'5 с',err:0,con:'изолирован',ty:'психосессия 100%',ex:'«разбери тревогу перед встречей»',rec:'Изоляция соблюдается, ноль попыток выхода в бизнес'},
+    teacher:{n:'Тичер',r:'Английский',req:140,succ:99,tok:'90 тыс',sec:'4 с',err:0,con:'Акс',ty:'урок 80%, повторение 20%',ex:'«урок на сегодня», «как сказать это по-английски»',rec:'300 слов пройдено, пора поднимать уровень до A2'},
+    radar:{n:'Радар',r:'Сбор AI-новостей',req:5200,succ:97,tok:'320 тыс',sec:'40 с',err:6,con:'Аналитик',ty:'новостной дайджест 100%',ex:'«что нового в AI», «дай дайджест за день»',rec:'Добавить арабоязычные источники под рынок ОАЭ'},
+    analyst:{n:'Аналитик',r:'Отчёт рынка',req:160,succ:98,tok:'300 тыс',sec:'25 с',err:2,con:'Радар',ty:'аналитический отчёт 100%',ex:'«собери отчёт по рынку за неделю»',rec:'Тяжёлые отчёты, разбить разбор на части для скорости'},
+    auditor:{n:'Аудитор',r:'Наблюдатель системы',req:900,succ:99,tok:'110 тыс',sec:'фон',err:1,con:'все агенты',ty:'аудит 70%, здоровье 20%, ошибки 10%',ex:'«что со здоровьем системы», «были ли сбои»',rec:'Расширить сбор: токены и тип задачи, чтобы питать дашборд'},
+    advisor:{n:'Советник',r:'Рекомендации',req:24,succ:100,tok:'80 тыс',sec:'фон',err:0,con:'читает всё',ty:'рекомендация 100%',ex:'«что улучшить в системе»',rec:'Работает еженедельно, можно добавить разбор по каждому агенту'},
+    dashboard:{n:'Дашборд',r:'Витрина данных',req:0,succ:0,tok:'0',sec:'настройка',err:0,con:'Финансист, Связной, Радар',ty:'сбор витрины, в настройке',ex:'—',rec:'Приоритет номер один: подключить сбор в vitrina_db'},
+    controller:{n:'Контролёр',r:'Проверка маршрутов',req:0,succ:0,tok:'настройка',sec:'настройка',err:0,con:'Акс, Аудитор',ty:'проверка маршрута, в настройке',ex:'—',rec:'Готовность 55%, довести до полного запуска'}
   };
   var apick=document.getElementById('apick'),apanel=document.getElementById('apanel');
   if(apick){apick.addEventListener('change',function(){var a=AG[apick.value];if(!a){apanel.classList.remove('on');apanel.innerHTML='';return;}
-    apanel.innerHTML='<div class="akpis"><div class="akpi"><b>'+a.req+'</b><span>обращений</span></div><div class="akpi"><b>'+(a.succ?a.succ+'%':'—')+'</b><span>успешно</span></div><div class="akpi"><b>'+a.tok+'</b><span>токенов/мес</span></div><div class="akpi"><b>'+a.sec+'</b><span>ответ</span></div><div class="akpi"><b>'+a.err+'</b><span>ошибок</span></div></div><div class="arow"><b>Роль:</b> '+a.r+'</div><div class="arow"><b>Основной тип задач:</b> '+a.tt+'</div><div class="arow"><b>Связи:</b> '+a.con+'</div><div class="arec"><b>Рекомендация Советника:</b> '+a.rec+'</div>';
+    apanel.innerHTML='<div class="akpis"><div class="akpi"><b>'+a.req+'</b><span>обращений</span></div><div class="akpi"><b>'+(a.succ?a.succ+'%':'—')+'</b><span>успешно</span></div><div class="akpi"><b>'+a.tok+'</b><span>токенов/мес</span></div><div class="akpi"><b>'+a.sec+'</b><span>ответ</span></div><div class="akpi"><b>'+a.err+'</b><span>ошибок</span></div></div><div class="arow"><b>Роль:</b> '+a.r+'</div><div class="arow"><b>Типы задач:</b> '+a.ty+'</div><div class="arow"><b>Примеры:</b> '+a.ex+'</div><div class="arow"><b>Связи:</b> '+a.con+'</div><div class="arec"><b>Рекомендация Советника:</b> '+a.rec+'</div>';
     apanel.classList.add('on');});}
 </script>
 </body>
